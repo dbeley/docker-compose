@@ -1,0 +1,23 @@
+---
+version: "2"
+services:
+  airsonic:
+    image: linuxserver/airsonic
+    container_name: airsonic
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - CONTEXT_PATH=URL_BASE #optional
+      - JAVA_OPTS=options #optional
+    volumes:
+      - /path/to/config:/config
+      - /path/to/music:/music
+      - /path/to/playlists:/playlists
+      - /path/to/podcasts:/podcasts
+      # - /path/to/other media:/media #optional
+    ports:
+      - 4040:4040
+    devices:
+      - /dev/snd:/dev/snd #optional
+    restart: unless-stopped

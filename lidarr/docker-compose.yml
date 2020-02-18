@@ -1,0 +1,18 @@
+---
+version: "2"
+services:
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - UMASK_SET=022 #optional
+    volumes:
+      - /path/to/appdata/config:/config
+      - /path/to/music:/music
+      - /path/to/downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
