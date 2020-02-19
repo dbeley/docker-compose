@@ -1,6 +1,32 @@
 ---
 version: "2"
+
+volumes:
+  nextcloud:
+  db:
+
 services:
+  nextcloud_db:
+    image: linuxserver/mariadb
+    container_name: nextcloud_db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD
+      - MYSQL_DATABASE=USER_DB_NAME #optional
+      - MYSQL_USER=MYSQL_USER #optional
+      - MYSQL_PASSWORD=DATABASE_PASSWORD #optional
+      # - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
+    volumes:
+      - ./config_db:/config
+      - ./db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+
   nextcloud:
     image: linuxserver/nextcloud
     container_name: nextcloud
@@ -8,9 +34,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
-    volumes:
-      - /path/to/appdata:/config
-      - path/to/data:/data
     ports:
-      - 443:443
-    restart: unless-stopped
+      - 8081:80
+      - 444:443
+    links:
+      - nextcloud_db
+    volumes:
+      - ./config:/config
+      - ~/nfs/:/data
+    restart: always

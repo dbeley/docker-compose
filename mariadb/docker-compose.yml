@@ -7,8 +7,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD
       - TZ=Europe/Paris
+      - MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD
       - MYSQL_DATABASE=USER_DB_NAME #optional
       - MYSQL_USER=MYSQL_USER #optional
       - MYSQL_PASSWORD=DATABASE_PASSWORD #optional
