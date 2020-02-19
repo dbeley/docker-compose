@@ -14,5 +14,5 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ./config:/config
-      - ~/nfs/Expansion/Downloads:/downloads
+      - /home/david/nfs/Expansion/Downloads:/downloads
     restart: unless-stopped

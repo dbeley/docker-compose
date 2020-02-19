@@ -11,7 +11,7 @@ services:
       # - UMASK_SET=022 #optional
     volumes:
       - ./config:/config
-      - ~/nfs/:/data/
+      - /home/david/nfs/:/data/
       # - path/to/tvseries:/data/tvshows
       # - /path/to/movies:/data/movies
       # - /path for transcoding:/transcode #optional

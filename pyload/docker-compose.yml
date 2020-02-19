@@ -9,8 +9,8 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - /path/to/pyload/config:/config
-      - /path/to/downloads:/downloads
+      - ./config:/config
+      - /home/david/nfs/Expansion/Downloads:/downloads
     ports:
       - 8000:8000
       - 7227:7227 #optional
