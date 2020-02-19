@@ -10,7 +10,7 @@ services:
       - TZ=Europe/Paris
       - RUN_OPTS=run options here #optional
     volumes:
-      - path to data:/config
+      - ./config:/config
       - path to blackhole:/downloads
     ports:
       - 9117:9117

@@ -9,7 +9,7 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - /path/to/appdata/config:/config
+      - ./config:/config
     ports:
       - 80:80
       - 443:443

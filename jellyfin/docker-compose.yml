@@ -1,24 +1,25 @@
 ---
-version: "2"
+version: "3"
 services:
   jellyfin:
     image: linuxserver/jellyfin
     container_name: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Europe/Paris
-      - UMASK_SET=022 #optional
+      # - UMASK_SET=022 #optional
     volumes:
-      - /path/to/library:/config
-      - path/to/tvseries:/data/tvshows
-      - /path/to/movies:/data/movies
-      - /path for transcoding:/transcode #optional
-      - /opt/vc/lib:/opt/vc/lib #optional
+      - ./config:/config
+      - ~/nfs/:/data/
+      # - path/to/tvseries:/data/tvshows
+      # - /path/to/movies:/data/movies
+      # - /path for transcoding:/transcode #optional
+      # - /opt/vc/lib:/opt/vc/lib #optional
     ports:
       - 8096:8096
       - 8920:8920 #optional
-    devices:
-      - /dev/dri:/dev/dri #optional
-      - /dev/vchiq:/dev/vchiq #optional
+    # devices:
+      # - /dev/dri:/dev/dri #optional
+      # - /dev/vchiq:/dev/vchiq #optional
     restart: unless-stopped
