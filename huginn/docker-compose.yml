@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  huginn_mysql:
+    image: mysql
+    env_file:
+      - ./mysql.env
+  huginn:
+    image: huginn/huginn
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./mysql.env
+    depends_on:
+      - huginn_mysql:mysql
