@@ -4,6 +4,7 @@ services:
   deluge:
     image: linuxserver/deluge
     container_name: deluge
+    # web ui at port 8112
     network_mode: host
     environment:
       - PUID=1000
@@ -12,6 +13,6 @@ services:
       - UMASK_SET=022 #optional
       - DELUGE_LOGLEVEL=error #optional
     volumes:
-      - config/:/config
+      - ./config:/config
       - ~/nfs/Expansion/Downloads:/downloads
     restart: unless-stopped
