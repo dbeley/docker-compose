@@ -12,5 +12,7 @@ services:
       - "3000:3000"
     env_file:
       - ./mysql.env
-    depends_on:
+        # depends_on:
+        #   - huginn_mysql:mysql
+    links:
       - huginn_mysql:mysql

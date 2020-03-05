@@ -13,7 +13,7 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
-      - traefik.yml:/etc/traefik/traefik.yaml:ro
+      - ./traefik.yml:/etc/traefik/traefik.yaml:ro
 
     labels:
       - "traefik.enable=true"
@@ -25,6 +25,20 @@ services:
       - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.https_redirect.redirectscheme.permanent=true"
 
+      # Docker labels for enabling Traefik dashboard
+      - "traefik.http.routers.traefik.rule=Host(`traefik`)"
+      - "traefik.http.routers.traefik.entrypoints=secure"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+
+  echo:
+    image: "hashicorp/http-echo"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.echo.rule=Host(`echo`)"
+      - "traefik.http.routers.echo.entrypoints=secure"
+      - "traefik.http.routers.echo.tls.certresolver=le"
+    
 networks: 
   default: 
     external:

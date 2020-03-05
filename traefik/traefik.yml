@@ -23,3 +23,6 @@ certificatesResolvers:
       httpChallenge:
         # used during the challenge
         entryPoint: insecure
+
+api:
+    dashboard: true
