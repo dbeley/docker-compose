@@ -1,0 +1,25 @@
+#Traefik.yml
+
+#Define HTTP and HTTPS entrypoints
+entryPoints:
+  insecure:
+    address: ":80"
+  secure:
+    address: ":443"
+
+#Dynamic configuration will come from docker labels
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    network: "traefik-network"
+    exposedByDefault: false 
+
+#Enable acme with http file challenge
+certificatesResolvers:
+  le:
+    acme:
+      email: david.beley@protonmail.com
+      storage: /acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: insecure

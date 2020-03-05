@@ -15,3 +15,13 @@ services:
       - 801:80
       # - 443:443 #optional
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.echo.rule=Host(`dokuwiki.example.com`)"
+      - "traefik.http.routers.echo.entrypoints=secure"
+      - "traefik.http.routers.echo.tls.certresolver=le"
+
+networks: 
+  default: 
+    external:
+      name: "traefik-network" #The same network defined in Docker provider config

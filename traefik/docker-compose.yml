@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   reverse-proxy:
     # The official v2 Traefik docker image
@@ -14,3 +13,19 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+      - traefik.yml:/etc/traefik/traefik.yaml:ro
+
+    labels:
+      - "traefik.enable=true"
+      
+      # HTTP to HTTPS redirection
+      - "traefik.http.routers.http_catchall.rule=HostRegexp(`{any:.+}`)"
+      - "traefik.http.routers.http_catchall.entrypoints=insecure"
+      - "traefik.http.routers.http_catchall.middlewares=https_redirect"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.permanent=true"
+
+networks: 
+  default: 
+    external:
+      name: "traefik-network" #The same network defined in Docker provider config
