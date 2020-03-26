@@ -1,5 +1,12 @@
 #Traefik.yml
 
+log:
+    level: INFO
+
+api:
+    insecure: true
+    dashboard: true
+
 #Define HTTP and HTTPS entrypoints
 entryPoints:
   insecure:
@@ -11,18 +18,14 @@ entryPoints:
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
-    network: "traefik-network"
     exposedByDefault: false 
 
-#Enable acme with http file challenge
-certificatesResolvers:
-  le:
-    acme:
-      email: david.beley@protonmail.com
-      storage: /acme.json
-      httpChallenge:
-        # used during the challenge
-        entryPoint: insecure
-
-api:
-    dashboard: true
+    # #Enable acme with http file challenge
+    # certificatesResolvers:
+    #   le:
+    #     acme:
+    #       email: david.beley@protonmail.com
+    #       storage: /acme.json
+    #       httpChallenge:
+    #         # used during the challenge
+    #         entryPoint: insecure
