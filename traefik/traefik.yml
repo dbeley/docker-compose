@@ -20,12 +20,12 @@ providers:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false 
 
-    # #Enable acme with http file challenge
-    # certificatesResolvers:
-    #   le:
-    #     acme:
-    #       email: david.beley@protonmail.com
-    #       storage: /acme.json
-    #       httpChallenge:
-    #         # used during the challenge
-    #         entryPoint: insecure
+    # - --certificatesresolvers.le.acme.tlschallenge=true
+certificatesResolvers:
+  le:
+    acme:
+      #caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      storage: /acme.json
+      email: dbeley@protonmail.com
+      httpChallenge:
+        entryPoint: insecure
