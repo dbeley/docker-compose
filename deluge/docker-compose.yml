@@ -4,8 +4,11 @@ services:
   deluge:
     image: linuxserver/deluge
     container_name: deluge
+    restart: unless-stopped
     # web ui at port 8112
-    network_mode: host
+    # ports:
+    #   - "8112:8112"
+    # network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
@@ -14,5 +17,15 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ./config:/config
-      - /home/david/nfs/Expansion/Downloads:/downloads
-    restart: unless-stopped
+      - $DOWNLOAD_FOLDER:/downloads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.deluge.entrypoints=secure"
+      - "traefik.http.routers.deluge.rule=Host(`deluge.$DOMAIN`)"
+      - "traefik.http.services.deluge.loadbalancer.server.port=8112"
+      - "traefik.http.routers.deluge.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
