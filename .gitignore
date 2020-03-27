@@ -3,3 +3,4 @@ config/
 config_db/
 db/
 .env
+acme.json
