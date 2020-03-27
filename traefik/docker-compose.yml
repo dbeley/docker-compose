@@ -23,7 +23,7 @@ services:
       ## HTTP REDIRECT
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.routers.redirect-https.rule=hostregexp(`{host:.+}`)"
-      - "traefik.http.routers.redirect-https.entrypoints=web"
+      - "traefik.http.routers.redirect-https.entrypoints=secure"
       - "traefik.http.routers.redirect-https.middlewares=redirect-to-https"
 
 networks:
