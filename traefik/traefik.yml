@@ -20,7 +20,6 @@ providers:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false 
 
-    # - --certificatesresolvers.le.acme.tlschallenge=true
 certificatesResolvers:
   le:
     acme:
