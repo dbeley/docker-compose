@@ -1,0 +1,27 @@
+---
+version: "3"
+services:
+  homer:
+    image: b4bz/homer:latest
+    container_name: homer
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config.yml:/www/config.yml
+      - ./assets/:/www/assets
+    # ports:
+    #   - 8080:8080
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homer.entrypoints=secure"
+      - "traefik.http.routers.homer.rule=Host(`homer.$DOMAIN`)"
+      - "traefik.http.services.homer.loadbalancer.server.port=8080"
+      - "traefik.http.routers.homer.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

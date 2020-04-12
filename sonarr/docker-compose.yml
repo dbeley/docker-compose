@@ -10,9 +10,20 @@ services:
       - TZ=Europe/Paris
       - UMASK_SET=022 #optional
     volumes:
-      - path to data:/config
-      - path/to/tvseries:/tv
-      - path/to/downloadclient-downloads:/downloads
-    ports:
-      - 8989:8989
+      - ./config:/config
+      - $EXPORT_FOLDER:/tv
+      - $DOWNLOAD_FOLDER:/downloads
+    # ports:
+    #   - 8989:8989
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.entrypoints=secure"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.$DOMAIN`)"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+      - "traefik.http.routers.sonarr.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

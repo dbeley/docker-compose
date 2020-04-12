@@ -11,7 +11,18 @@ services:
       - RUN_OPTS=run options here #optional
     volumes:
       - ./config:/config
-      - path to blackhole:/downloads
-    ports:
-      - 9117:9117
+      - $DOWNLOAD_FOLDER:/downloads
+    # ports:
+    #   - 9117:9117
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jackett.entrypoints=secure"
+      - "traefik.http.routers.jackett.rule=Host(`jackett.$DOMAIN`)"
+      - "traefik.http.services.jackett.loadbalancer.server.port=9117"
+      - "traefik.http.routers.jackett.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

@@ -10,9 +10,20 @@ services:
       - TZ=Europe/Paris
       - UMASK_SET=022 #optional
     volumes:
-      - path to data:/config
-      - path/to/movies:/movies
-      - path/to/downloadclient-downloads:/downloads
-    ports:
-      - 7878:7878
+      - ./config:/config
+      - $EXPORT_FOLDER:/movies
+      - $DOWNLOAD_FOLDER:/downloads
+    # ports:
+    #   - 7878:7878
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.entrypoints=secure"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.$DOMAIN`)"
+      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+      - "traefik.http.routers.radarr.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
