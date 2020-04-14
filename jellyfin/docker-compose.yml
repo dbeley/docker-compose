@@ -25,10 +25,10 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jellyfin.entrypoints=secure"
+      - "traefik.http.routers.jellyfin.entrypoints=insecure"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.$DOMAIN`)"
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
-      - "traefik.http.routers.jellyfin.tls.certresolver=le"
+      # - "traefik.http.routers.jellyfin.tls.certresolver=le"
 
 networks:
     default:

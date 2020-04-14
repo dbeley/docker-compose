@@ -13,15 +13,15 @@ services:
       - ./config:/config
       - $MUSIC_FOLDER:/music
       - $DOWNLOAD_FOLDER:/downloads
-    ports:
-      - 8686:8686
+        # ports:
+        #   - 8686:8686
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.lidarr.entrypoints=secure"
+      - "traefik.http.routers.lidarr.entrypoints=insecure"
       - "traefik.http.routers.lidarr.rule=Host(`lidarr.$DOMAIN`)"
       - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
-      - "traefik.http.routers.lidarr.tls.certresolver=le"
+        # - "traefik.http.routers.lidarr.tls.certresolver=le"
 
 networks:
     default:

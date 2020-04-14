@@ -20,10 +20,10 @@ services:
       - $DOWNLOAD_FOLDER:/downloads
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.deluge.entrypoints=secure"
+      - "traefik.http.routers.deluge.entrypoints=insecure"
       - "traefik.http.routers.deluge.rule=Host(`deluge.$DOMAIN`)"
       - "traefik.http.services.deluge.loadbalancer.server.port=8112"
-      - "traefik.http.routers.deluge.tls.certresolver=le"
+        # - "traefik.http.routers.deluge.tls.certresolver=le"
 
 networks:
     default:

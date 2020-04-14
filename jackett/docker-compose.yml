@@ -17,10 +17,10 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jackett.entrypoints=secure"
+      - "traefik.http.routers.jackett.entrypoints=insecure"
       - "traefik.http.routers.jackett.rule=Host(`jackett.$DOMAIN`)"
       - "traefik.http.services.jackett.loadbalancer.server.port=9117"
-      - "traefik.http.routers.jackett.tls.certresolver=le"
+        # - "traefik.http.routers.jackett.tls.certresolver=le"
 
 networks:
     default:
