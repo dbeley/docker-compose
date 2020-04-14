@@ -21,7 +21,7 @@ services:
     labels:
       - "traefik.enable=true"
       ## HTTP REDIRECT
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=secure"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.routers.redirect-https.rule=hostregexp(`{host:.+}`)"
       - "traefik.http.routers.redirect-https.entrypoints=insecure"
       - "traefik.http.routers.redirect-https.middlewares=redirect-to-https"
