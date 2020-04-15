@@ -15,10 +15,10 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.freshrss.entrypoints=secure"
+      - "traefik.http.routers.freshrss.entrypoints=insecure"
       - "traefik.http.routers.freshrss.rule=Host(`freshrss.$DOMAIN`)"
       - "traefik.http.services.freshrss.loadbalancer.server.port=80"
-      - "traefik.http.routers.freshrss.tls.certresolver=le"
+      # - "traefik.http.routers.freshrss.tls.certresolver=le"
 
 networks:
     default:

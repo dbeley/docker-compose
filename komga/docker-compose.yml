@@ -1,0 +1,32 @@
+---
+version: '3.3'
+services:
+  komga:
+    image: gotson/komga
+    container_name: komga
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+      - type: bind
+        source: $BOOKS_FOLDER
+        target: /books
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+        read_only: true
+    # ports:
+    #   - 8080:8080
+    user: "1000:1000"
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.komga.entrypoints=insecure"
+      - "traefik.http.routers.komga.rule=Host(`komga.$DOMAIN`)"
+      - "traefik.http.services.komga.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.komga.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

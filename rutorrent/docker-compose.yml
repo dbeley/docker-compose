@@ -1,0 +1,29 @@
+---
+version: "2.1"
+services:
+  rutorrent:
+    image: linuxserver/rutorrent
+    container_name: rutorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./config:/config
+      - $DOWNLOAD_FOLDER:/downloads
+    ports:
+      # - 80:80 # webui
+      - 5000:5000 # scgi
+      - 51413:51413 # bittorrent
+      - 6881:6881/udp # bittorrent
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rutorrent.entrypoints=insecure"
+      - "traefik.http.routers.rutorrent.rule=Host(`rutorrent.$DOMAIN`)"
+      - "traefik.http.services.rutorrent.loadbalancer.server.port=80"
+      # - "traefik.http.routers.rutorrent.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

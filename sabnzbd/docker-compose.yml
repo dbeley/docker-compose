@@ -1,0 +1,29 @@
+---
+version: "2.1"
+services:
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./config:/config
+      - $DOWNLOAD_FOLDER:/downloads
+      # - path to incomplete downloads:/incomplete-downloads #optional
+    ports:
+      - 8080:8080
+      # - 9090:9090 # https webui
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sabnzbd.entrypoints=insecure"
+      - "traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.$DOMAIN`)"
+      - "traefik.http.services.sabnzbd.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.sabnzbd.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

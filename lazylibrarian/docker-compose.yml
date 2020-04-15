@@ -1,0 +1,29 @@
+---
+version: "2.1"
+services:
+  lazylibrarian:
+    image: linuxserver/lazylibrarian
+    container_name: lazylibrarian
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      # - DOCKER_MODS=linuxserver/calibre-web:calibre #optional
+    volumes:
+      - ./config:/config
+      - $DOWNLOAD_FOLDER:/downloads
+      - $DATA_FOLDER:/books
+    # ports:
+    #   - 5299:5299
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.lazylibrarian.entrypoints=insecure"
+      - "traefik.http.routers.lazylibrarian.rule=Host(`lazylibrarian.$DOMAIN`)"
+      - "traefik.http.services.lazylibrarian.loadbalancer.server.port=5299"
+      # - "traefik.http.routers.lazylibrarian.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
