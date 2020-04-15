@@ -14,7 +14,7 @@ services:
       # - 80:80 # webui
       - 5000:5000 # scgi
       - 51413:51413 # bittorrent
-      - 6881:6881/udp # bittorrent
+        # - 6881:6881/udp # bittorrent
     restart: unless-stopped
     labels:
       - "traefik.enable=true"

@@ -12,8 +12,8 @@ services:
       - ./config:/config
       - $DOWNLOAD_FOLDER:/downloads
       # - path to incomplete downloads:/incomplete-downloads #optional
-    ports:
-      - 8080:8080
+    # ports:
+    #   - 8080:8080
       # - 9090:9090 # https webui
     restart: unless-stopped
     labels:
