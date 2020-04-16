@@ -1,0 +1,20 @@
+---
+version: "3"
+services:
+  statping:
+    image: statping/statping
+    container_name: statping
+    # ports:
+    #   - 8080:8080
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.statping.entrypoints=insecure"
+      - "traefik.http.routers.statping.rule=Host(`statping.$DOMAIN`)"
+      - "traefik.http.services.statping.loadbalancer.server.port=8080"
+        # - "traefik.http.routers.statping.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

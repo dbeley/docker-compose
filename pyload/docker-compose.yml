@@ -11,7 +11,18 @@ services:
     volumes:
       - ./config:/config
       - /home/david/nfs/Expansion/Downloads:/downloads
-    ports:
-      - 8000:8000
-      - 7227:7227 #optional
+    # ports:
+    #   - 8000:8000
+    #   - 7227:7227 #optional
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pyload.entrypoints=insecure"
+      - "traefik.http.routers.pyload.rule=Host(`pyload.$DOMAIN`)"
+      - "traefik.http.services.pyload.loadbalancer.server.port=8000"
+        # - "traefik.http.routers.pyload.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
