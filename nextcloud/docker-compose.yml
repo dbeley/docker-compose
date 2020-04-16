@@ -1,44 +1,27 @@
 ---
-version: "2"
-
-volumes:
-  nextcloud:
-  db:
-
+version: "2.1"
 services:
-  nextcloud_db:
-    image: linuxserver/mariadb
-    container_name: nextcloud_db
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-      - MYSQL_ROOT_PASSWORD=nextcloudpasswordtochange1
-      - MYSQL_DATABASE=nextcloud #optional
-      - MYSQL_USER=nextcloud #optional
-      - MYSQL_PASSWORD=nextcloudpasswordtochange2 #optional
-      # - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
-    volumes:
-      - ./config_db:/config
-      - ./db:/var/lib/mysql
-    ports:
-      - 3306:3306
-    restart: always
-    # command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
-
   nextcloud:
     image: linuxserver/nextcloud
     container_name: nextcloud
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Paris
-    ports:
-      - 8081:80
-      - 444:443
-    links:
-      - nextcloud_db
+      - TZ=Europe/London
     volumes:
       - ./config:/config
-      - /home/david/nfs/:/data
-    restart: always
+      - $DATA_FOLDER:/data
+    # ports:
+    #   - 443:443
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextcloud.entrypoints=insecure"
+      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.$DOMAIN`)"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=443"
+        # - "traefik.http.routers.nextcloud.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

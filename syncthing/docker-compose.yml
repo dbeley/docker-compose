@@ -1,0 +1,31 @@
+---
+version: "2.1"
+services:
+  syncthing:
+    image: linuxserver/syncthing
+    container_name: syncthing
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - UMASK_SET=022
+    volumes:
+      - ./config:/config
+      - /path/to/data1:/data1
+      - /path/to/data2:/data2
+    ports:
+    #   - 8384:8384 # webui
+      - 22000:22000 # listening port
+      - 21027:21027/udp # protocol discovery
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.syncthing.entrypoints=insecure"
+      - "traefik.http.routers.syncthing.rule=Host(`syncthing.$DOMAIN`)"
+      - "traefik.http.services.syncthing.loadbalancer.server.port=8384"
+        # - "traefik.http.routers.syncthing.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

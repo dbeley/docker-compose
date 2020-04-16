@@ -1,0 +1,21 @@
+version: '2'
+services:
+  thelounge:
+    image: thelounge/thelounge:latest
+    container_name: thelounge
+    # ports:
+    #   - "9000:9000"
+    restart: always
+    volumes:
+      - ./config:/var/opt/thelounge # bind lounge config from the host's file system
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.thelounge.entrypoints=insecure"
+      - "traefik.http.routers.thelounge.rule=Host(`thelounge.$DOMAIN`)"
+      - "traefik.http.services.thelounge.loadbalancer.server.port=9000"
+        # - "traefik.http.routers.thelounge.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
