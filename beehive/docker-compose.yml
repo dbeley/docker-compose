@@ -1,0 +1,24 @@
+---
+version: "3"
+services:
+  beehive:
+    image: fribbledom/beehive
+    container_name: beehive
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    # ports:
+    #   - 8181:8181
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.beehive.entrypoints=insecure"
+      - "traefik.http.routers.beehive.rule=Host(`beehive.$DOMAIN`)"
+      - "traefik.http.services.beehive.loadbalancer.server.port=8181"
+        # - "traefik.http.routers.beehive.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
