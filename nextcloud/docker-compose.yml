@@ -7,7 +7,6 @@ volumes:
 services:
   db:
     image: mariadb
-    container_name: nextcloud_db
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
     volumes:
@@ -19,15 +18,23 @@ services:
       - MYSQL_USER=nextcloud
 
   app:
-    image: nextcloud
-    container_name: nextcloud
-    # ports:
-    #   - 8082:80
+    image: nextcloud:fpm
     links:
       - db
     volumes:
       - nextcloud:/var/www/html
-      - $DATA_FOLDER:/data
+    restart: always
+
+  web:
+    image: nginx
+    # ports:
+    #   - 8080:80
+    links:
+      - app
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    volumes_from:
+      - app
     restart: always
     labels:
       - "traefik.enable=true"
@@ -40,19 +47,3 @@ networks:
     default:
         external:
             name: $DEFAULT_NETWORK
-# ---
-# version: "2.1"
-# services:
-#   nextcloud:
-#     image: linuxserver/nextcloud
-#     container_name: nextcloud
-#     environment:
-#       - PUID=1000
-#       - PGID=1000
-#       - TZ=Europe/London
-#     volumes:
-#       - ./config:/config
-#       - $DATA_FOLDER:/data
-#     # ports:
-#     #   - 443:443
-#     restart: unless-stopped
