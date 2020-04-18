@@ -10,7 +10,7 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config:/config
-      - /home/david/nfs/Expansion/Downloads:/downloads
+      - $DOWNLOAD_FOLDER:/downloads
     # ports:
     #   - 8000:8000
     #   - 7227:7227 #optional

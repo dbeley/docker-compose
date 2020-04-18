@@ -13,12 +13,16 @@ services:
   shaarli:
     image: shaarli/shaarli:master
     container_name: shaarli
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
     # ports:
     #     - 80:80
     #     - 443:443
     volumes:
-      - ./cache:/var/www/shaarli/cache
-      - ./data:/var/www/shaarli/data
+      - shaarli-cache:/var/www/shaarli/cache
+      - shaarli-data:/var/www/shaarli/data
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -31,3 +35,7 @@ networks:
     default:
         external:
             name: $DEFAULT_NETWORK
+
+volumes:
+  shaarli-cache:
+  shaarli-data:

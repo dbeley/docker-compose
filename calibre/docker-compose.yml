@@ -5,8 +5,8 @@ services:
     image: linuxserver/calibre-web
     container_name: calibre-web
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=Europe/London
       - DOCKER_MODS=linuxserver/calibre-web:calibre
     volumes:

@@ -2,11 +2,12 @@
 version: "2"
 services:
   ampache:
-      image: ampache/ampache
-      # image: ampache/ampache:develop # dev branch
+    image: ampache/ampache
+    # image: ampache/ampache:develop # dev branch
     container_name: ampache
     volumes:
-      - $MEDIA_FOLDER:/media
+      - $MEDIA_FOLDER:/media:ro
+      - ampache-config:/var/www/config
     # ports:
     #   - 80:80
     restart: unless-stopped
@@ -18,6 +19,9 @@ services:
       # - "traefik.http.routers.ampache.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    external:
+      name: $DEFAULT_NETWORK
+
+volumes:
+  ampache-config:

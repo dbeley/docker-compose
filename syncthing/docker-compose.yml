@@ -11,8 +11,7 @@ services:
       - UMASK_SET=022
     volumes:
       - ./config:/config
-      - /path/to/data1:/data1
-      - /path/to/data2:/data2
+      - $DATA_FOLDER:/data1
     ports:
     #   - 8384:8384 # webui
       - 22000:22000 # listening port
