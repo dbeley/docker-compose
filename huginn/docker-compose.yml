@@ -1,18 +1,37 @@
 version: '2'
 
 services:
-  huginn_mysql:
-    image: mysql
+  mysqldata:
+    image: mysql:5.7
+    command: /bin/true
+
+  mysql:
+    image: mysql:5.7
+    restart: always
     env_file:
-      - ./mysql.env
-  huginn:
-    image: huginn/huginn
+      - ../mysql.env
+    volumes_from:
+      - mysqldata
+
+  web:
+    image: huginn/huginn-single-process
+    container_name: huginn
     restart: always
     ports:
       - "3000:3000"
     env_file:
-      - ./mysql.env
-        # depends_on:
-        #   - huginn_mysql:mysql
-    links:
-      - huginn_mysql:mysql
+      - ../mysql.env
+      - ../secrets.env
+    depends_on:
+      - mysql
+
+  threaded:
+    image: huginn/huginn-single-process
+    command: /scripts/init bin/threaded.rb
+    restart: always
+    env_file:
+      - ../mysql.env
+      - ../secrets.env
+    depends_on:
+      - mysql
+      - web
