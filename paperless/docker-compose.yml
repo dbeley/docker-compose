@@ -1,0 +1,71 @@
+version: '2.1'
+
+services:
+    webserver:
+        image: danielquinn/paperless
+        container_name: paperless_webserver
+        # build: ./
+        # uncomment the following line to start automatically on system boot
+        restart: always
+        # ports:
+        #     # You can adapt the port you want Paperless to listen on by
+        #     # modifying the part before the `:`.
+        #     - "8000:8000"
+        healthcheck:
+            test: ["CMD", "curl" , "-f", `paperless.$DOMAIN`]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        volumes:
+            - data:/usr/src/paperless/data
+            - media:/usr/src/paperless/media
+            # You have to adapt the local path you want the consumption
+            # directory to mount to by modifying the part before the ':'.
+            - $CONSUME_FOLDER:/consume
+        env_file: docker-compose.env
+        # The reason the line is here is so that the webserver that doesn't do
+        # any text recognition and doesn't have to install unnecessary
+        # languages the user might have set in the env-file by overwriting the
+        # value with nothing.
+        environment:
+            - PAPERLESS_OCR_LANGUAGES=fra eng
+        command: ["gunicorn", "-b", "0.0.0.0:8000"]
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.paperless.entrypoints=insecure"
+          - "traefik.http.routers.paperless.rule=Host(`paperless.$DOMAIN`)"
+          - "traefik.http.services.paperless.loadbalancer.server.port=8000"
+            # - "traefik.http.routers.paperless.tls.certresolver=le"
+
+    consumer:
+        image: danielquinn/paperless
+        container_name: paperless_consumer
+        # build: ./
+        # uncomment the following line to start automatically on system boot
+        # restart: always
+        depends_on:
+            webserver:
+                condition: service_healthy
+        volumes:
+            - data:/usr/src/paperless/data
+            - media:/usr/src/paperless/media
+            # This should be set to the same value as the consume directory
+            # in the webserver service above.
+            - $CONSUME_FOLDER:/consume
+            # Likewise, you can add a local path to mount a directory for
+            # exporting. This is not strictly needed for paperless to
+            # function, only if you're exporting your files: uncomment
+            # it and fill in a local path if you know you're going to
+            # want to export your documents.
+            # - /path/to/another/arbitrary/place:/export
+        env_file: docker-compose.env
+        command: ["document_consumer", "--no-inotify"]
+
+volumes:
+    data:
+    media:
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
