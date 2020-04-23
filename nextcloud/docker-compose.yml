@@ -7,6 +7,7 @@ volumes:
 services:
   db:
     image: mariadb
+    container_name: nextcloud_db
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
     volumes:
@@ -18,30 +19,37 @@ services:
       - MYSQL_USER=nextcloud
 
   app:
-    image: nextcloud:fpm
+    image: nextcloud
+    container_name: nextcloud
     links:
       - db
     volumes:
       - nextcloud:/var/www/html
     restart: always
-
-  web:
-    image: nginx
-    # ports:
-    #   - 8080:80
-    links:
-      - app
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    volumes_from:
-      - app
-    restart: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud.entrypoints=insecure"
       - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.$DOMAIN`)"
-      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=8080"
         # - "traefik.http.routers.nextcloud.tls.certresolver=le"
+
+        #   web:
+        #     image: nginx
+        #     # ports:
+        #     #   - 8080:80
+        #     links:
+        #       - app
+        #     volumes:
+        #       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        #     volumes_from:
+        #       - app
+        #     restart: always
+        #     labels:
+        #       - "traefik.enable=true"
+        #       - "traefik.http.routers.nextcloud.entrypoints=insecure"
+        #       - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.$DOMAIN`)"
+        #       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+        #         # - "traefik.http.routers.nextcloud.tls.certresolver=le"
 
 networks:
     default:

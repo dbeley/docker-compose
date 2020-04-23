@@ -14,7 +14,7 @@ services:
     volumes:
       - ./config:/config
       - $DOWNLOAD_FOLDER:/downloads
-      - $WATCH_FOLDER:/watch
+      # - $WATCH_FOLDER:/watch
     ports:
       # - 9091:9091
       - 51413:51413

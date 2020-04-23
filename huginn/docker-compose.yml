@@ -9,7 +9,7 @@ services:
     image: mysql:5.7
     restart: always
     env_file:
-      - ../mysql.env
+      - ./mysql.env
     volumes_from:
       - mysqldata
 
@@ -20,8 +20,8 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - ../mysql.env
-      - ../secrets.env
+      - ./mysql.env
+      - ./secrets.env
     depends_on:
       - mysql
 
@@ -30,8 +30,8 @@ services:
     command: /scripts/init bin/threaded.rb
     restart: always
     env_file:
-      - ../mysql.env
-      - ../secrets.env
+      - ./mysql.env
+      - ./secrets.env
     depends_on:
       - mysql
       - web
