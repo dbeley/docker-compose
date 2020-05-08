@@ -12,7 +12,7 @@ services:
         #     # modifying the part before the `:`.
         #     - "8000:8000"
         healthcheck:
-            test: ["CMD", "curl" , "-f", `paperless.$DOMAIN`]
+            test: ["CMD", "curl" , "-f", "http://paperless.$DOMAIN"]
             interval: 30s
             timeout: 10s
             retries: 5

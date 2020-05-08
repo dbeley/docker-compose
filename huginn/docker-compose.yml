@@ -19,7 +19,7 @@ services:
       - HUGINN_DATABASE_ADAPTER=postgresql
       - HUGINN_DATABASE_USERNAME=$DB_USERNAME
       - HUGINN_DATABASE_PASSWORD=$DB_PASSWORD
-    links:
+    depends_on:
       - huginn_db
     labels:
       - "traefik.enable=true"
