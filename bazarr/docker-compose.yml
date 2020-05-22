@@ -1,0 +1,27 @@
+---
+version: "2.1"
+services:
+  deluge:
+    image: linuxserver/bazarr
+    container_name: bazarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - UMASK_SET=022 #optional
+    volumes:
+      - ./config:/config
+      - $MOVIE_FOLDER:/movies
+      - $SERIES_FOLDER:/tv
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bazarr.entrypoints=insecure"
+      - "traefik.http.routers.bazarr.rule=Host(`bazarr.$DOMAIN`)"
+      - "traefik.http.services.bazarr.loadbalancer.server.port=6767"
+        # - "traefik.http.routers.bazarr.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

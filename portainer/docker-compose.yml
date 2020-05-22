@@ -1,0 +1,28 @@
+---
+version: "3"
+services:
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    # ports:
+    #   - 9000:9000
+    #   - 8000:8000
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+        #     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.entrypoints=insecure"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.$DOMAIN`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+        # - "traefik.http.routers.portainer.tls.certresolver=le"
+    
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
+volumes:
+        portainer_data:
