@@ -11,15 +11,26 @@ services:
       # - UMASK_SET=022 #optional
     volumes:
       - ./config:/config
-      - /home/david/nfs/:/data/
+      - $MEDIA_FOLDER:/data/
       # - path/to/tvseries:/data/tvshows
       # - /path/to/movies:/data/movies
       # - /path for transcoding:/transcode #optional
       # - /opt/vc/lib:/opt/vc/lib #optional
-    ports:
-      - 8096:8096
-      - 8920:8920 #optional
+    # ports:
+    #   - 8096:8096
+    #   - 8920:8920 #optional
     # devices:
       # - /dev/dri:/dev/dri #optional
       # - /dev/vchiq:/dev/vchiq #optional
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.entrypoints=insecure"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.$DOMAIN`)"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
+      # - "traefik.http.routers.jellyfin.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

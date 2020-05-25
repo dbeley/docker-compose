@@ -8,16 +8,27 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
-      - CONTEXT_PATH=URL_BASE #optional
-      - JAVA_OPTS=options #optional
+      # - CONTEXT_PATH=URL_BASE #optional
+      # - JAVA_OPTS=options #optional
     volumes:
-      - /path/to/config:/config
-      - /path/to/music:/music
-      - /path/to/playlists:/playlists
-      - /path/to/podcasts:/podcasts
+      - ./config:/config
+      - $MUSIC_FOLDER:/music
+      - $PLAYLIST_FOLDER:/playlists
+      - $PODCAST_FOLDER:/podcasts
       # - /path/to/other media:/media #optional
-    ports:
-      - 4040:4040
+    # ports:
+    #   - 4040:4040
     devices:
       - /dev/snd:/dev/snd #optional
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.airsonic.entrypoints=insecure"
+      - "traefik.http.routers.airsonic.rule=Host(`airsonic.$DOMAIN`)"
+      - "traefik.http.services.airsonic.loadbalancer.server.port=4040"
+        # - "traefik.http.routers.airsonic.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

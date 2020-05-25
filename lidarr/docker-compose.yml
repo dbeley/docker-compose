@@ -1,5 +1,5 @@
 ---
-version: "2"
+version: "2.1"
 services:
   lidarr:
     image: linuxserver/lidarr
@@ -7,12 +7,23 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Paris
+      - TZ=Europe/London
       - UMASK_SET=022 #optional
     volumes:
-      - /path/to/appdata/config:/config
-      - /path/to/music:/music
-      - /path/to/downloads:/downloads
-    ports:
-      - 8686:8686
+      - ./config:/config
+      - $MUSIC_FOLDER:/music
+      - $DOWNLOAD_FOLDER:/downloads
+        # ports:
+        #   - 8686:8686
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.lidarr.entrypoints=insecure"
+      - "traefik.http.routers.lidarr.rule=Host(`lidarr.$DOMAIN`)"
+      - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
+        # - "traefik.http.routers.lidarr.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

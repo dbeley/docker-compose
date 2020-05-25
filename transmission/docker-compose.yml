@@ -1,0 +1,33 @@
+---
+version: "2.1"
+services:
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      # - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      - USER=$TRANSMISSION_USER #optional
+      - PASS=$TRANSMISSION_PASSWORD #optional
+    volumes:
+      - ./config:/config
+      - $DOWNLOAD_FOLDER:/downloads
+      - $WATCH_FOLDER:/watch
+    ports:
+      # - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.transmission.entrypoints=insecure"
+      - "traefik.http.routers.transmission.rule=Host(`transmission.$DOMAIN`)"
+      - "traefik.http.services.transmission.loadbalancer.server.port=9091"
+        # - "traefik.http.routers.transmission.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
