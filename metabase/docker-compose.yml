@@ -1,7 +1,18 @@
 version: '3'
 
 services:
-    metabase:
-        image: metabase/metabase
-        ports:
-          - "3000:3000"
+  metabase:
+    image: metabase/metabase
+    # ports:
+    #   - "3000:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.metabase.entrypoints=insecure"
+      - "traefik.http.routers.metabase.rule=Host(`metabase.$DOMAIN`)"
+      - "traefik.http.services.metabase.loadbalancer.server.port=3000"
+        # - "traefik.http.routers.metabase.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

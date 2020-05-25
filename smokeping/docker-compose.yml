@@ -1,0 +1,27 @@
+---
+version: "2.1"
+services:
+  smokeping:
+    image: linuxserver/smokeping
+    container_name: smokeping
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./config:/config
+      - ./data:/data
+    # ports:
+    #   - 80:80
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.smokeping.entrypoints=insecure"
+      - "traefik.http.routers.smokeping.rule=Host(`smokeping.$DOMAIN`)"
+      - "traefik.http.services.smokeping.loadbalancer.server.port=80"
+      # - "traefik.http.routers.smokeping.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

@@ -1,0 +1,41 @@
+---
+# Shaarli - Docker Compose example configuration
+#
+# See:
+# - https://shaarli.readthedocs.io/en/master/docker/shaarli-images/
+# - https://shaarli.readthedocs.io/en/master/guides/install-shaarli-with-debian9-and-docker/
+#
+# Environment variables:
+# - SHAARLI_VIRTUAL_HOST      Fully Qualified Domain Name for the Shaarli instance
+# - SHAARLI_LETSENCRYPT_EMAIL Contact email for certificate renewal
+version: '3'
+services:
+  shaarli:
+    image: shaarli/shaarli:master
+    container_name: shaarli
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    # ports:
+    #     - 80:80
+    #     - 443:443
+    volumes:
+      - shaarli-cache:/var/www/shaarli/cache
+      - shaarli-data:/var/www/shaarli/data
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.shaarli.entrypoints=insecure"
+      - "traefik.http.routers.shaarli.rule=Host(`shaarli.$DOMAIN`)"
+      - "traefik.http.services.shaarli.loadbalancer.server.port=80"
+        # - "traefik.http.routers.shaarli.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
+
+volumes:
+  shaarli-cache:
+  shaarli-data:

@@ -1,44 +1,57 @@
----
-version: "2"
+version: '2'
 
 volumes:
   nextcloud:
   db:
 
 services:
-  nextcloud_db:
-    image: linuxserver/mariadb
+  db:
+    image: mariadb
     container_name: nextcloud_db
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-      - MYSQL_ROOT_PASSWORD=nextcloudpasswordtochange1
-      - MYSQL_DATABASE=nextcloud #optional
-      - MYSQL_USER=nextcloud #optional
-      - MYSQL_PASSWORD=nextcloudpasswordtochange2 #optional
-      # - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
-    volumes:
-      - ./config_db:/config
-      - ./db:/var/lib/mysql
-    ports:
-      - 3306:3306
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
-    # command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
 
-  nextcloud:
-    image: linuxserver/nextcloud
+  app:
+    image: nextcloud
     container_name: nextcloud
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-    ports:
-      - 8081:80
-      - 444:443
     links:
-      - nextcloud_db
+      - db
     volumes:
-      - ./config:/config
-      - /home/david/nfs/:/data
+      - nextcloud:/var/www/html
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextcloud.entrypoints=insecure"
+      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.$DOMAIN`)"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=8080"
+        # - "traefik.http.routers.nextcloud.tls.certresolver=le"
+
+        #   web:
+        #     image: nginx
+        #     # ports:
+        #     #   - 8080:80
+        #     links:
+        #       - app
+        #     volumes:
+        #       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        #     volumes_from:
+        #       - app
+        #     restart: always
+        #     labels:
+        #       - "traefik.enable=true"
+        #       - "traefik.http.routers.nextcloud.entrypoints=insecure"
+        #       - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.$DOMAIN`)"
+        #       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+        #         # - "traefik.http.routers.nextcloud.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

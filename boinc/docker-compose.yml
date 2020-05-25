@@ -1,0 +1,13 @@
+version: '2'
+services:
+  boinc:
+    image: boinc/client
+    container_name: boinc
+    restart: always
+    network_mode: host
+    pid: host
+    volumes:
+      - /opt/appdata/boinc:/var/lib/boinc
+    environment:
+      - BOINC_GUI_RPC_PASSWORD=123
+      - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc

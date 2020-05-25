@@ -1,0 +1,20 @@
+---
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    # ports:
+    #   - 3000:3000
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.entrypoints=insecure"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.$DOMAIN`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      # - "traefik.http.routers.grafana.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

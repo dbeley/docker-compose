@@ -2,11 +2,26 @@
 version: "2"
 services:
   ampache:
-      image: ampache/ampache
-      # image: ampache/ampache:develop # dev branch
+    image: ampache/ampache
+    # image: ampache/ampache:develop # dev branch
     container_name: ampache
     volumes:
-      - /path/to/music media:/media
-    ports:
-      - 80:80
+      - $MEDIA_FOLDER:/media:ro
+      - ampache-config:/var/www/config
+    # ports:
+    #   - 80:80
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ampache.entrypoints=insecure"
+      - "traefik.http.routers.ampache.rule=Host(`ampache.$DOMAIN`)"
+      - "traefik.http.services.ampache.loadbalancer.server.port=80"
+      # - "traefik.http.routers.ampache.tls.certresolver=le"
+
+networks:
+  default:
+    external:
+      name: $DEFAULT_NETWORK
+
+volumes:
+  ampache-config:

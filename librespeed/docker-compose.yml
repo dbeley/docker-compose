@@ -1,0 +1,32 @@
+---
+version: "2.1"
+services:
+  librespeed:
+    image: linuxserver/librespeed
+    container_name: librespeed
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - PASSWORD=$PASSWORD
+        # - DB_TYPE=sqlite #optional
+        # - DB_NAME=DB_NAME #optional
+        # - DB_HOSTNAME=DB_HOSTNAME #optional
+        # - DB_USERNAME=DB_USERNAME #optional
+        # - DB_PASSWORD=DB_PASSWORD #optional
+    volumes:
+      - ./config:/config
+        # ports:
+        #   - 80:80
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.librespeed.entrypoints=insecure"
+      - "traefik.http.routers.librespeed.rule=Host(`librespeed.$DOMAIN`)"
+      - "traefik.http.services.librespeed.loadbalancer.server.port=80"
+        # - "traefik.http.routers.librespeed.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

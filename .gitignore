@@ -4,3 +4,6 @@ config_db/
 db/
 .env
 acme.json
+assets
+favd
+data

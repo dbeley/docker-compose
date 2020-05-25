@@ -10,7 +10,18 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config:/config
-    ports:
-      - 80:80
-      - 443:443
+    # ports:
+    #   - 80:80
+    #   - 443:443
     restart: unless-stopped
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.heimdall.entrypoints=insecure"
+        - "traefik.http.routers.heimdall.rule=Host(`heimdall.$DOMAIN`,`home.$DOMAIN`)"
+        - "traefik.http.services.heimdall.loadbalancer.server.port=80"
+        # - "traefik.http.routers.heimdall.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
