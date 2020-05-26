@@ -4,15 +4,15 @@ log:
     level: INFO
 
 api:
-    insecure: true
-    dashboard: true
+    insecure: false
+    dashboard: false
 
 #Define HTTP and HTTPS entrypoints
 entryPoints:
   insecure:
     address: ":80"
-    # secure:
-    #   address: ":443"
+  secure:
+    address: ":443"
 
 #Dynamic configuration will come from docker labels
 providers:
@@ -20,11 +20,11 @@ providers:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false 
 
-    # certificatesResolvers:
-    #   le:
-    #     acme:
-    #       #caServer: https://acme-staging-v02.api.letsencrypt.org/directory
-    #       storage: /acme.json
-    #       email: dbeley@protonmail.com
-    #       httpChallenge:
-    #         entryPoint: insecure
+certificatesResolvers:
+  le:
+    acme:
+      #caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      storage: /acme.json
+      email: dbeley@protonmail.com
+      httpChallenge:
+        entryPoint: insecure

@@ -1,0 +1,27 @@
+---
+version: "2.1"
+services:
+  nginx:
+    image: linuxserver/nginx
+    container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./config:/config
+        # ports:
+        # - 80:80
+        # - 443:443
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=secure"
+      - "traefik.http.routers.nginx.rule=Host(`$DOMAIN`)"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+      - "traefik.http.routers.nginx.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

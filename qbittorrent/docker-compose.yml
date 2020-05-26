@@ -13,17 +13,17 @@ services:
     volumes:
       - ./config:/config
       - $DOWNLOAD_FOLDER:/downloads
-    ports:
-      - 6881:6881
-      - 6881:6881/udp
+        # ports:
+      # - 6881:6881
+      # - 6881:6881/udp
       # - 8080:8080
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.qbittorrent.entrypoints=insecure"
+      - "traefik.http.routers.qbittorrent.entrypoints=secure"
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.$DOMAIN`)"
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
-        # - "traefik.http.routers.qbittorrent.tls.certresolver=le"
+      - "traefik.http.routers.qbittorrent.tls.certresolver=le"
 
 networks:
     default:
