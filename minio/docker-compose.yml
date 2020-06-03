@@ -1,0 +1,29 @@
+---
+version: "3"
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    volumes:
+      - $MINIO_FOLDER:/data
+    # ports:
+    #   - 9000:9000
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minio.entrypoints=insecure"
+      - "traefik.http.routers.minio.rule=Host(`minio.$DOMAIN`)"
+      - "traefik.http.services.minio.loadbalancer.server.port=9000"
+      # - "traefik.http.routers.minio.tls.certresolver=le"
+    environment:
+      MINIO_ACCESS_KEY: $S3_ACCESS_KEY
+      MINIO_SECRET_KEY: $S3_SECRET_KEY
+    #   MINIO_ACCESS_KEY: $MINIO_ACCESS_KEY
+    #   MINIO_SECRET_KEY: $MINIO_SECRET_KEY
+    # command: server /data
+    command: gateway s3 https://s3.fr-par.scw.cloud/
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
