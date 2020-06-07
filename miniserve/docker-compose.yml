@@ -1,0 +1,27 @@
+---
+version: "3"
+services:
+  miniserve:
+    image: svenstaro/miniserve
+    container_name: miniserve
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./data:/tmp
+    # ports:
+    #   - 8080:8080
+    restart: always
+    command: /tmp
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.miniserve.entrypoints=insecure"
+      - "traefik.http.routers.miniserve.rule=Host(`miniserve.$DOMAIN`)"
+      - "traefik.http.services.miniserve.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.miniserve.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

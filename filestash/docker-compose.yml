@@ -1,0 +1,22 @@
+---
+version: "3"
+services:
+  app:
+    image: machines/filestash
+    container_name: filestash
+    # environment:
+      # - APPLICATION_URL=
+    # ports:
+    #   - 8334:8334
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.filestash.entrypoints=insecure"
+      - "traefik.http.routers.filestash.rule=Host(`filestash.$DOMAIN`)"
+      - "traefik.http.services.filestash.loadbalancer.server.port=8334"
+      # - "traefik.http.routers.jellyfin.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
