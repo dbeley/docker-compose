@@ -9,7 +9,7 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - ./data:/tmp
+      - $DATA_FOLDER:/tmp
     # ports:
     #   - 8080:8080
     restart: always

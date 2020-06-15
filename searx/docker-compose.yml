@@ -1,0 +1,27 @@
+---
+version: "3"
+services:
+  searx:
+    image: wonderfall/searx
+    container_name: searx
+    environment:
+      # - PUID=1000
+      # - PGID=1000
+      - TZ=Europe/Paris
+    # volumes:
+    #   - ./config:/config
+    #   - $MEDIA_FOLDER:/data/
+    # ports:
+    #   - 8888:8888
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.searx.entrypoints=insecure"
+      - "traefik.http.routers.searx.rule=Host(`searx.$DOMAIN`)"
+      - "traefik.http.services.searx.loadbalancer.server.port=8888"
+      # - "traefik.http.routers.searx.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
