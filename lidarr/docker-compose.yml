@@ -12,7 +12,7 @@ services:
     volumes:
       - ./config:/config
       - $MUSIC_FOLDER:/music
-      - $DOWNLOAD_FOLDER:/downloads/
+      - $DOWNLOADS_FOLDER:/downloads/
         # ports:
         #   - 8686:8686
     restart: unless-stopped

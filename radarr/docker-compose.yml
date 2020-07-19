@@ -11,8 +11,8 @@ services:
       - UMASK_SET=022 #optional
     volumes:
       - ./config:/config
-      - $MOVIE_FOLDER:/movies
-      - $DOWNLOAD_FOLDER:/downloads
+      - $MOVIES_FOLDER:/movies
+      - $DOWNLOADS_FOLDER:/downloads
     # ports:
     #   - 7878:7878
     restart: unless-stopped

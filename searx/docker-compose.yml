@@ -8,9 +8,6 @@ services:
       # - PUID=1000
       # - PGID=1000
       - TZ=Europe/Paris
-    # volumes:
-    #   - ./config:/config
-    #   - $MEDIA_FOLDER:/data/
     # ports:
     #   - 8888:8888
     restart: always

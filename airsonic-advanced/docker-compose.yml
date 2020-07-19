@@ -1,0 +1,29 @@
+---
+version: "2"
+services:
+  airsonicadvanced:
+    image: airsonicadvanced/airsonic-advanced:latest
+    container_name: airsonicadvanced
+    environment:
+            # - PUID=1000
+            # - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - $MUSIC_FOLDER:/var/music
+      - $PODCAST_FOLDER:/var/podcasts
+      - $PLAYLIST_FOLDER:/var/playlists
+      - ./config:/var/airsonic
+    # ports:
+    #   - 4040:4040
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.airsonicadvanced.entrypoints=insecure"
+      - "traefik.http.routers.airsonicadvanced.rule=Host(`airsonicadvanced.$DOMAIN`)"
+      - "traefik.http.services.airsonicadvanced.loadbalancer.server.port=4040"
+        # - "traefik.http.routers.airsonicadvanced.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

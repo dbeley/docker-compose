@@ -11,8 +11,8 @@ services:
       - UMASK_SET=022 #optional
     volumes:
       - ./config:/config
-      - $EXPORT_FOLDER:/tv
-      - $DOWNLOAD_FOLDER:/downloads
+      - $SERIES_FOLDER:/tv
+      - $DOWNLOADS_FOLDER:/downloads
     # ports:
     #   - 8989:8989
     restart: unless-stopped

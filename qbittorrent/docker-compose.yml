@@ -12,7 +12,7 @@ services:
       - WEBUI_PORT=8080
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
     # ports:
     #   - 6881:6881
     #   - 6881:6881/udp

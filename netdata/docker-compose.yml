@@ -1,0 +1,31 @@
+---
+version: "3"
+services:
+  netdata:
+    image: netdata/netdata
+    container_name: netdata
+    hostname: docker.home
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.netdata.entrypoints=insecure"
+      - "traefik.http.routers.netdata.rule=Host(`netdata.$DOMAIN`)"
+      - "traefik.http.services.netdata.loadbalancer.server.port=19999"
+      # - "traefik.http.routers.jellyfin.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

@@ -11,7 +11,7 @@ services:
       - RUN_OPTS=run options here #optional
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
     # ports:
     #   - 9117:9117
     restart: unless-stopped

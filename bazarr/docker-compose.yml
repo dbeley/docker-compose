@@ -12,7 +12,7 @@ services:
       - UMASK_SET=022 #optional
     volumes:
       - ./config:/config
-      - $MOVIE_FOLDER:/movies
+      - $MOVIES_FOLDER:/movies
       - $SERIES_FOLDER:/tv
     labels:
       - "traefik.enable=true"
