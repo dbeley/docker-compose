@@ -5,8 +5,8 @@ services:
     image: linuxserver/jellyfin
     container_name: jellyfin
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Paris
       # - UMASK_SET=022 #optional
     volumes:

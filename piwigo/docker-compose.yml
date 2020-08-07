@@ -13,12 +13,23 @@ services:
     # ports:
     #   - 80:80
     restart: unless-stopped
+    links:
+      - piwigo_db
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.piwigo.entrypoints=insecure"
       - "traefik.http.routers.piwigo.rule=Host(`piwigo.$DOMAIN`)"
       - "traefik.http.services.piwigo.loadbalancer.server.port=80"
       # - "traefik.http.routers.piwigo.tls.certresolver=le"
+  piwigo_db:
+    image: mariadb
+    volumes:
+      - piwigo_db:/var/lib/mysql
+    env_file:
+      - ./db.env
+
+volumes:
+  piwigo_db:
 
 networks:
     default:
