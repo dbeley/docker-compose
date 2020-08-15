@@ -2,18 +2,16 @@
 version: "3"
 services:
   cyberchef:
-    image: remnux/cyberchef
+    image: mpepping/cyberchef
     container_name: cyberchef
-    # volumes:
-    #   - ./data/:/data/
     # ports:
-    #   - 8080:8080
+    #   - 8000:8000
     restart: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cyberchef.entrypoints=insecure"
       - "traefik.http.routers.cyberchef.rule=Host(`cyberchef.$DOMAIN`)"
-      - "traefik.http.services.cyberchef.loadbalancer.server.port=8080"
+      - "traefik.http.services.cyberchef.loadbalancer.server.port=8000"
         # - "traefik.http.routers.cyberchef.tls.certresolver=le"
 
 networks:

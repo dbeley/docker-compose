@@ -1,0 +1,33 @@
+---
+version: "3.7"
+services:
+  archivebox:
+    image: nikisweeting/archivebox:latest
+    command: server 0.0.0.0:8080
+    stdin_open: true
+    tty: true
+    container_name: archivebox
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - USE_COLOR=True
+      - SHOW_PROGRESS=False
+      - TIMEOUT=120
+      - MEDIA_TIMEOUT=300
+    volumes:
+      - $DATA_FOLDER:/data
+        # ports:
+        #   - 8080:8080
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.archivebox.entrypoints=insecure"
+      - "traefik.http.routers.archivebox.rule=Host(`archivebox.$DOMAIN`)"
+      - "traefik.http.services.archivebox.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.archivebox.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
