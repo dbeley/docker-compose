@@ -1,0 +1,28 @@
+---
+version: "3"
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - $ROOT_FOLDER:/srv
+      - ./filebrowser.db:/database.db
+      - ./.filebrowser.json:/.filebrowser.jsonb
+    # ports:
+    #   - 80:80
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.filebrowser.entrypoints=insecure"
+      - "traefik.http.routers.filebrowser.rule=Host(`filebrowser.$DOMAIN`)"
+      - "traefik.http.services.filebrowser.loadbalancer.server.port=80"
+      # - "traefik.http.routers.filebrowser.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
