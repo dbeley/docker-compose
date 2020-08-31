@@ -5,8 +5,8 @@ services:
     image: airsonicadvanced/airsonic-advanced:latest
     container_name: airsonicadvanced
     environment:
-            # - PUID=1000
-            # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Paris
     volumes:
       - $MUSIC_FOLDER:/var/music
@@ -19,7 +19,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.airsonicadvanced.entrypoints=insecure"
-      - "traefik.http.routers.airsonicadvanced.rule=Host(`airsonicadvanced.$DOMAIN`)"
+      - "traefik.http.routers.airsonicadvanced.rule=Host(`airsonic.$DOMAIN`)"
       - "traefik.http.services.airsonicadvanced.loadbalancer.server.port=4040"
         # - "traefik.http.routers.airsonicadvanced.tls.certresolver=le"
 
