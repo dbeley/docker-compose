@@ -1,0 +1,27 @@
+---
+version: "3"
+services:
+  code-server:
+    image: codercom/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - $CONFIG:/home/coder/.config
+      - $PWD:/home/coder/project
+    # ports:
+    #   - 8080:8080
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.code-server.entrypoints=insecure"
+      - "traefik.http.routers.code-server.rule=Host(`code.$DOMAIN`)"
+      - "traefik.http.services.code-server.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.code-server.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

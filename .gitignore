@@ -12,3 +12,4 @@ firefly/.env_firefly
 firefly/.env_firefly_db
 filebrowser/.filebrowser.json
 filebrowser/filebrowser.db
+n8n/n8n/
