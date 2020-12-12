@@ -1,0 +1,36 @@
+---
+version: "3"
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ='Europe/Paris'
+      - WEBPASSWORD=$WEB_PASSWORD
+    volumes:
+      - './etc-pihole/:/etc/pihole/'
+      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+#     labels:
+#       - "traefik.enable=true"
+#       - "traefik.http.routers.pihole.entrypoints=insecure"
+#       - "traefik.http.routers.pihole.rule=Host(`pihole.$DOMAIN`)"
+#       - "traefik.http.services.pihole.loadbalancer.server.port=80"
+#       # - "traefik.http.routers.pihole.tls.certresolver=le"
+#
+# networks:
+#     default:
+#         external:
+#             name: $DEFAULT_NETWORK
