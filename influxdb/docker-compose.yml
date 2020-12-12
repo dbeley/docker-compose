@@ -1,0 +1,22 @@
+---
+version: "3"
+services:
+  influxdb:
+    image: influxdb:latest 
+    container_name: influxdb
+    volumes:
+      - /opt/appdata/influxdb:/var/lib/influxdb
+    # ports:
+    #   - 8086:8086
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.influxdb.entrypoints=insecure"
+      - "traefik.http.routers.influxdb.rule=Host(`influxdb.$DOMAIN`)"
+      - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
+      # - "traefik.http.routers.influxdb.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
