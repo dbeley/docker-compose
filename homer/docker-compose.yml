@@ -5,8 +5,8 @@ services:
     image: b4bz/homer:latest
     container_name: homer
     environment:
-      - PUID=1000
-      - PGID=1000
+      - UID=1000
+      - GID=1000
       - TZ=Europe/Paris
     volumes:
       - ./assets/:/www/assets
