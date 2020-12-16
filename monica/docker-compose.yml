@@ -1,0 +1,22 @@
+---
+version: "3"
+services:
+  monica:
+    image: monica
+    container_name: monica
+    volumes:
+      - $MONICA_DATA:/var/www/html/storage
+    # ports:
+    #   - 80:80
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.monica.entrypoints=insecure"
+      - "traefik.http.routers.monica.rule=Host(`monica.$DOMAIN`)"
+      - "traefik.http.services.monica.loadbalancer.server.port=80"
+      # - "traefik.http.routers.monica.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK

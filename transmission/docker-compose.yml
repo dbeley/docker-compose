@@ -7,7 +7,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Europe/PAris
       # - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
       - USER=$TRANSMISSION_USER #optional
       - PASS=$TRANSMISSION_PASSWORD #optional

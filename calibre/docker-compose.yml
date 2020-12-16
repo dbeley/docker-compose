@@ -7,7 +7,7 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=Europe/London
+      - TZ=Europe/Paris
       - DOCKER_MODS=linuxserver/calibre-web:calibre
     volumes:
       - ./config:/config
