@@ -11,9 +11,10 @@ services:
       # - UMASK_SET=022 #optional
     volumes:
       - ./config:/config
-      - $MEDIA_FOLDER:/data/
-      # - path/to/tvseries:/data/tvshows
-      # - /path/to/movies:/data/movies
+      # - $MEDIA_FOLDER:/data/
+      - $TVSERIES_FOLDER:/data/tvshows
+      - $MOVIES_FOLDER:/data/movies
+      - $CONCERTS_FOLDER:/data/concerts
       # - /path for transcoding:/transcode #optional
       # - /opt/vc/lib:/opt/vc/lib #optional
     # ports:

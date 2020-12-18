@@ -1,11 +1,26 @@
 ---
 version: "3"
 services:
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_DATABASE=monica
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: unless-stopped
   monica:
     image: monica
     container_name: monica
+    depends_on:
+      - db
+    environment:
+      - APP_KEY=$APP_KEY
+      - DB_HOST=db
     volumes:
-      - $MONICA_DATA:/var/www/html/storage
+      - data:/var/www/html/storage
     # ports:
     #   - 80:80
     restart: unless-stopped
@@ -15,6 +30,10 @@ services:
       - "traefik.http.routers.monica.rule=Host(`monica.$DOMAIN`)"
       - "traefik.http.services.monica.loadbalancer.server.port=80"
       # - "traefik.http.routers.monica.tls.certresolver=le"
+
+volumes:
+  data:
+  mysql:
 
 networks:
     default:

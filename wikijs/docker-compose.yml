@@ -14,19 +14,30 @@ services:
       - db-data:/var/lib/postgresql/data
 
   wiki:
-    image: requarks/wiki:2
+    image: requarks/wiki:latest
     depends_on:
       - db
     environment:
       DB_TYPE: postgres
       DB_HOST: db
       DB_PORT: 5432
-      DB_USER: WIKIJS_DB_USER
+      DB_USER: $WIKIJS_DB_USER
       DB_PASS: $WIKIJS_DB_PASSWORD
       DB_NAME: wiki
     restart: unless-stopped
-    ports:
-      - "80:3000"
+    # ports:
+    #   - "80:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wikijs.entrypoints=insecure"
+      - "traefik.http.routers.wikijs.rule=Host(`wiki.$DOMAIN`)"
+      - "traefik.http.services.wikijs.loadbalancer.server.port=3000"
+      # - "traefik.http.routers.wikijs.tls.certresolver=le"
 
 volumes:
   db-data:
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
