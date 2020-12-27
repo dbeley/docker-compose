@@ -7,12 +7,17 @@ services:
     # ports:
     #  - 3000:3000
     restart: always
+    volumes:
+        - grafana-storage:/var/lib/grafana
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.entrypoints=insecure"
       - "traefik.http.routers.grafana.rule=Host(`grafana.$DOMAIN`)"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
       # - "traefik.http.routers.grafana.tls.certresolver=le"
+
+volumes:
+    grafana-storage:
 
 networks:
     default:
