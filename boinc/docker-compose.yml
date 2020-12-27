@@ -1,7 +1,10 @@
 version: '2'
 services:
   boinc:
-    image: boinc/client
+    # ARMv7 32-bit e.g. Raspberry Pi 2
+    image: boinc/client:arm32v7
+    # ARMv8 64-bit e.g. Raspberry Pi 3/4
+    image: boinc/client:arm64v8
     container_name: boinc
     restart: always
     network_mode: host
@@ -9,5 +12,5 @@ services:
     volumes:
       - /opt/appdata/boinc:/var/lib/boinc
     environment:
-      - BOINC_GUI_RPC_PASSWORD=123
-      - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc
+      - BOINC_GUI_RPC_PASSWORD=$BOINC_PASSWORD
+      - BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"
