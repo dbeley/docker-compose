@@ -2,7 +2,7 @@ version: '2'
 services:
   boinc:
     # standard x86-64
-    image: boinc/latest
+    image: boinc/client:latest
     # ARMv7 32-bit e.g. Raspberry Pi 2
     # image: boinc/client:arm32v7
     # ARMv8 64-bit e.g. Raspberry Pi 3/4
