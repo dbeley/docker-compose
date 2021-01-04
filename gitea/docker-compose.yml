@@ -10,9 +10,9 @@ services:
     environment:
       - USER_UID=1000
       - USER_GID=1000
-    ports:
-      # - "3000:3000"
-      - "22:22"
+    # ports:
+      # - 3000:3000
+      # - 22:22
     depends_on:
       - db
     restart: always

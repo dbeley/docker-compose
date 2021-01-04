@@ -10,12 +10,8 @@ services:
       - MYSQL_DATABASE=lychee
       - MYSQL_USER=lychee
       - MYSQL_PASSWORD=$LYCHEE_PASSWORD
-    expose:
-      - 3306
     volumes:
-      - mysql:/var/lib/mysql
-    networks:
-      - lychee
+      - lychee_mysql:/var/lib/mysql
     restart: unless-stopped
 
   lychee:
@@ -27,17 +23,17 @@ services:
       - ./lychee/conf:/conf
       - ./lychee/uploads:/uploads
       - ./lychee/sym:/sym
-    networks:
-      - lychee
+    links:
+      - lychee_db
     environment:
-      #- PUID=1000
-      #- PGID=1000
+      - PUID=1000
+      - PGID=1000
       # PHP timezone e.g. PHP_TZ=America/New_York
-      - PHP_TZ=UTC
+      - PHP_TZ=Europe/Paris
       #- APP_NAME=Laravel
       #- APP_ENV=local
       #- APP_DEBUG=true
-      #- APP_URL=http://localhost
+      - APP_URL=http://lychee.docker.home
       #- LOG_CHANNEL=stack
       - DB_CONNECTION=mysql
       - DB_HOST=lychee_db
@@ -84,4 +80,4 @@ networks:
             name: $DEFAULT_NETWORK
 
 volumes:
-  mysql:
+  lychee_mysql:
