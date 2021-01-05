@@ -15,4 +15,4 @@ services:
       - /opt/appdata/boinc:/var/lib/boinc
     environment:
       - BOINC_GUI_RPC_PASSWORD=$BOINC_PASSWORD
-      - BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"
+      - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc
