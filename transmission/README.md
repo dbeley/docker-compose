@@ -5,7 +5,7 @@
 ```
 DEFAULT_NETWORK=traefik-network
 DOMAIN=domain
-DOWNLOAD_FOLDER=/home/user/Downloads
+DOWNLOADS_FOLDER=/home/user/Downloads
 WATCH_FOLDER=/home/user/Downloads
 TRANSMISSION_USER=webuser_name
 TRANSMISSION_PASSWORD=webuser_password

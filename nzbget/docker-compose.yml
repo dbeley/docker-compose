@@ -10,7 +10,7 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
     # ports:
     #   - 6789:6789
     restart: unless-stopped

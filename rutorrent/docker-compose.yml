@@ -9,7 +9,7 @@ services:
       - PGID=1000
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
     ports:
       # - 80:80 # webui
       - 5000:5000 # scgi

@@ -10,7 +10,7 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
     # ports:
     #   - 8000:8000
     #   - 7227:7227 #optional

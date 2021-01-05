@@ -17,7 +17,7 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.deluge.entrypoints=insecure"

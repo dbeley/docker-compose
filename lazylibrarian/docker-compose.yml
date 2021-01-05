@@ -11,7 +11,7 @@ services:
       # - DOCKER_MODS=linuxserver/calibre-web:calibre #optional
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
       - $DATA_FOLDER:/books
     # ports:
     #   - 5299:5299

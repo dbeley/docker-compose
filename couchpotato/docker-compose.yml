@@ -11,7 +11,7 @@ services:
       - UMASK_SET=022
     volumes:
       - ./config:/config
-      - $DOWNLOAD_FOLDER:/downloads
+      - $DOWNLOADS_FOLDER:/downloads
       - $MOVIES_FOLDER:/movies
     # ports:
     #   - 5050:5050

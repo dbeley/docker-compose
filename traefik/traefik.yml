@@ -18,13 +18,13 @@ entryPoints:
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
-    exposedByDefault: false 
+    exposedByDefault: false
 
-# certificatesResolvers:
-#   le:
-#     acme:
-#       #caServer: https://acme-staging-v02.api.letsencrypt.org/directory
-#       storage: /acme.json
-#       email: dbeley@protonmail.com
-#       httpChallenge:
-#         entryPoint: insecure
+certificatesResolvers:
+  le:
+    acme:
+      #caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      storage: /acme.json
+      email: dbeley@protonmail.com
+      httpChallenge:
+        entryPoint: insecure
