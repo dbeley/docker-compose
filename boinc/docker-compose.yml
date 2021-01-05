@@ -13,6 +13,7 @@ services:
     pid: host
     volumes:
       - /opt/appdata/boinc:/var/lib/boinc
-    # environment:
-    #   - BOINC_GUI_RPC_PASSWORD=$BOINC_PASSWORD
-    #   - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc
+    environment:
+      - TZ=Europe/Paris
+      - BOINC_GUI_RPC_PASSWORD=$BOINC_PASSWORD
+      - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc
