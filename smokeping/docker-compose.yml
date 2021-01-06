@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   smokeping:
-    image: linuxserver/smokeping
+    image: ghcr.io/linuxserver/smokeping
     container_name: smokeping
     environment:
       - PUID=1000

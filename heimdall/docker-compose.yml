@@ -2,7 +2,7 @@
 version: "2"
 services:
   heimdall:
-    image: linuxserver/heimdall
+    image: ghcr.io/linuxserver/heimdall
     container_name: heimdall
     environment:
       - PUID=1000

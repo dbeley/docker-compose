@@ -2,7 +2,7 @@
 version: "2"
 services:
   freshrss:
-    image: linuxserver/freshrss
+    image: ghcr.io/linuxserver/freshrss
     container_name: freshrss
     environment:
       - PUID=1000

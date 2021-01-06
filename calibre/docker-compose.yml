@@ -2,13 +2,13 @@
 version: "2.1"
 services:
   calibre-web:
-    image: linuxserver/calibre-web
+    image: ghcr.io/linuxserver/calibre-web
     container_name: calibre-web
     environment:
       - PUID=0
       - PGID=0
       - TZ=Europe/Paris
-      - DOCKER_MODS=linuxserver/calibre-web:calibre
+      - DOCKER_MODS=ghcr.io/linuxserver/calibre-web:calibre
     volumes:
       - ./config:/config
       - $MEDIA_FOLDER:/books

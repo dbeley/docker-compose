@@ -2,7 +2,7 @@
 version: "2"
 services:
   airsonic:
-    image: linuxserver/airsonic
+    image: ghcr.io/linuxserver/airsonic
     container_name: airsonic
     environment:
       - PUID=1000

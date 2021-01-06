@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   nginx:
-    image: linuxserver/nginx
+    image: ghcr.io/linuxserver/nginx
     container_name: nginx
     environment:
       - PUID=1000

@@ -2,7 +2,7 @@
 version: "2"
 services:
   letsencrypt:
-    image: linuxserver/letsencrypt
+    image: ghcr.io/linuxserver/letsencrypt
     container_name: letsencrypt
     cap_add:
       - NET_ADMIN
