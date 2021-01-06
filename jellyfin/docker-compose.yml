@@ -20,9 +20,9 @@ services:
     # ports:
     #   - 8096:8096
     #   - 8920:8920 #optional
-    devices:
-      - /dev/dri:/dev/dri #optional
-        # - /dev/vchiq:/dev/vchiq #optional
+    # devices:
+    #   - /dev/dri:/dev/dri #optional
+    #     # - /dev/vchiq:/dev/vchiq #optional
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
