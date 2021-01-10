@@ -1,0 +1,19 @@
+---
+version: "3"
+services:
+  spleeter:
+    image: researchdeezer/spleeter
+    container_name: spleeter
+    # environment:
+      # - MODEL_PATH=/model
+    volumes:
+        - $AUDIO_IN:/input
+        - $AUDIO_OUT:/output
+        # - $MODEL_DIRECTORY:/model
+    restart: unless-stopped
+    # vocals/accompaniment
+    # command: separate -i /input/audio_1.mp3 /input/audio_2.mp3 -o /output -p spleeter:2stems
+    # vocals/bass/drums/other
+    # command: separate -i /input/audio_1.mp3 /input/audio_2.mp3 -o /output -p spleeter:4stems
+    # vocals/bass/drums/piano/other
+    command: separate -i /input/audio_1.mp3 -o /output -p spleeter:5stems

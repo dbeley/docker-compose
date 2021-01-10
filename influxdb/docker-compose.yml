@@ -2,13 +2,17 @@
 version: "3"
 services:
   influxdb:
-    image: influxdb:latest 
+    image: influxdb:latest
     container_name: influxdb
     volumes:
-      - /opt/appdata/influxdb:/var/lib/influxdb
+      - ./influxdb:/var/lib/influxdb
     # ports:
     #   - 8086:8086
     restart: always
+    environment:
+        INFLUX_DB: $INFLUX_DB
+        INFLUX_DB_USER: $INFLUX_DB_USER
+        INFLUX_USER_PASSWORD: $INFLUX_USER_PASSWORD
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.influxdb.entrypoints=insecure"

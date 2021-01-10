@@ -15,3 +15,5 @@ filebrowser/filebrowser.db
 n8n/n8n/
 dokuwiki/config*
 lychee/lychee
+spleeter/input
+spleeter/output
