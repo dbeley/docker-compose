@@ -13,7 +13,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
-      - UMASK_SET=022 #optional
+      - UMASK=022 #optional
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ./config:/config
