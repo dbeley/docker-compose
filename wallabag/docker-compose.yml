@@ -15,11 +15,17 @@ services:
       - SYMFONY__ENV__MAILER_USER=~
       - SYMFONY__ENV__MAILER_PASSWORD=~
       - SYMFONY__ENV__FROM_EMAIL=wallabag@example.com
-      - SYMFONY__ENV__DOMAIN_NAME=https://your-wallabag-url-instance.com
+      - SYMFONY__ENV__DOMAIN_NAME=http://wallabag.docker.home
     ports:
       - "80"
     volumes:
       - /opt/wallabag/images:/var/www/wallabag/web/assets/images
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wallabag.entrypoints=insecure"
+      - "traefik.http.routers.wallabag.rule=Host(`wallabag.$DOMAIN`)"
+      - "traefik.http.services.wallabag.loadbalancer.server.port=80"
+      # - "traefik.http.routers.wallabag.tls.certresolver=le"
   db:
     image: mariadb
     environment:
@@ -28,3 +34,8 @@ services:
       - /opt/wallabag/data:/var/lib/mysql
   redis:
     image: redis:alpine
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
