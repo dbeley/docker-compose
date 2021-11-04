@@ -1,13 +1,13 @@
 ---
-version: "2"
+version: "3"
 services:
   airsonicadvanced:
-    image: airsonicadvanced/airsonic-advanced:latest
     container_name: airsonicadvanced
+    image: airsonicadvanced/airsonic-advanced:latest
+    user: 1000:1000
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=Europe/Paris
+      - JAVA_OPTS=-Xmx1024m -Dserver.forward-headers-strategy=native
     volumes:
       - $MUSIC_FOLDER:/var/music
       - $PODCAST_FOLDER:/var/podcasts
@@ -15,7 +15,7 @@ services:
       - ./config:/var/airsonic
     # ports:
     #   - 4040:4040
-    restart: unless-stopped
+    restart: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.airsonicadvanced.entrypoints=insecure"
