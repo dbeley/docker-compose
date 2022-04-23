@@ -1,0 +1,28 @@
+---
+version: "3"
+services:
+  maloja:
+    image: krateng/maloja
+    container_name: maloja
+    environment:
+      - MALOJA_DATA_DIRECTORY=/mljdata
+      - MALOJA_FORCE_PASSWORD=$MALOJA_PASSWORD
+      - MALOJA_LASTFM_API_KEY=$MALOJA_LASTFM_API_KEY
+      - MALOJA_LASTFM_API_SECRET=$MALOJA_LASTFM_API_SECRET
+    volumes:
+      - ./config:/mljdata
+      - $MEDIA_FOLDER:/data/
+    # ports:
+    #   - 42010:42010
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maloja.entrypoints=insecure"
+      - "traefik.http.routers.maloja.rule=Host(`maloja.$DOMAIN`)"
+      - "traefik.http.services.maloja.loadbalancer.server.port=42010"
+      # - "traefik.http.routers.maloja.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
