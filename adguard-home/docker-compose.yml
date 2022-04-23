@@ -33,7 +33,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.adguardhome.entrypoints=insecure"
       - "traefik.http.routers.adguardhome.rule=Host(`adguard.$DOMAIN`)"
-      - "traefik.http.services.adguardhome.loadbalancer.server.port=80"
+      - "traefik.http.services.adguardhome.loadbalancer.server.port=3000"
       # - "traefik.http.routers.adguardhome.tls.certresolver=le"
 
 networks:
