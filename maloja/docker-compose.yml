@@ -11,7 +11,6 @@ services:
       - MALOJA_LASTFM_API_SECRET=$MALOJA_LASTFM_API_SECRET
     volumes:
       - ./config:/mljdata
-      - $MEDIA_FOLDER:/data/
     # ports:
     #   - 42010:42010
     restart: unless-stopped
