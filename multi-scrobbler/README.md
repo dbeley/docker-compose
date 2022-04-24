@@ -1,0 +1,5 @@
+# multi-scrobbler
+
+```
+mkdir config
+```

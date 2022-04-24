@@ -1,0 +1,33 @@
+---
+version: "3"
+services:
+  multi-scrobbler:
+      # image: foxxmd/multi-scrobbler:0.3.9
+    image: foxxmd/multi-scrobbler:latest
+    container_name: multi-scrobbler
+    environment:
+        # - LASTFM_API_KEY=$LASTFM_API_KEY #optional
+        # - LASTFM_SECRET=$LASTFM_SECRET #optional
+        # - SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID #optional
+        # - SPOTIFY_CLIENT_SECRET=$SPOTIFY_CLIENT_SECRET #optional
+        # - SPOTIFY_REDIRECT_URI=$SPOTIFY_REDIRECT_URI #optional
+        # - MALOJA_URL=$MALOJA_URL #optional
+        # - MALOJA_API_KEY=$MALOJA_API_KEY #optional
+      - CONFIG_DIR=/config
+      - TZ=Europe/Paris
+    volumes:
+      - ./config:/config
+    # ports:
+    #   - 9078:9078
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.multi-scrobbler.entrypoints=insecure"
+      - "traefik.http.routers.multi-scrobbler.rule=Host(`multi-scrobbler.$DOMAIN`)"
+      - "traefik.http.services.multi-scrobbler.loadbalancer.server.port=9078"
+      # - "traefik.http.routers.multi-scrobbler.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
