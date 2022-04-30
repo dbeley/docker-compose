@@ -294,3 +294,4 @@ FIREFLY_III_LAYOUT=v1
 # If you're stuck I understand you get desperate but look SOMEWHERE ELSE.
 #
 APP_URL=http://localhost
+TRUSTED_PROXIES=**
