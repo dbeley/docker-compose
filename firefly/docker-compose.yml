@@ -1,8 +1,8 @@
 ---
-version: "3"
+version: "3.3"
 services:
   fireflyiii:
-    image: jc5x/firefly-iii:latest
+    image: fireflyiii/core:latest
     container_name: fireflyiii
     environment:
       - PUID=1000
@@ -11,29 +11,34 @@ services:
       # - UMASK_SET=022 #optional
     env_file: .env_firefly
     volumes:
-      - firefly_iii_export:/var/www/firefly-iii/storage/export
       - firefly_iii_upload:/var/www/firefly-iii/storage/upload
-    restart: unless-stopped
+    restart: always
+    depends-on:
+      - db
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.fireflyiii.entrypoints=insecure"
       - "traefik.http.routers.fireflyiii.rule=Host(`fireflyiii.$DOMAIN`)"
       - "traefik.http.services.fireflyiii.loadbalancer.server.port=8080"
       # - "traefik.http.routers.fireflyiii.tls.certresolver=le"
-  fireflyiiidb:
-    image: yobasystems/alpine-mariadb:latest
+  db:
+    image: mariadb
+    hostname: fireflyiiidb
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
-    env_file: .env_firefly_db
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=firefly
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=firefly
+    restart: always
     volumes:
       - firefly_iii_db:/var/lib/mysql
 
 volumes:
-  firefly_iii_export:
   firefly_iii_upload:
-  firefly_iii_db:
+  db:
 
 networks:
     default:
