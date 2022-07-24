@@ -1,0 +1,27 @@
+---
+version: "3"
+services:
+  tubesync:
+    image: ghcr.io/meeb/tubesync:latest
+    container_name: tubesync
+    restart: unless-stopped
+    # ports:
+    #   - 4848:4848
+    volumes:
+      - ./config:/config
+      - $DOWNLOAD_FOLDER:/downloads
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tubesync.entrypoints=insecure"
+      - "traefik.http.routers.tubesync.rule=Host(`tubesync.$DOMAIN`)"
+      - "traefik.http.services.tubesync.loadbalancer.server.port=4848"
+      # - "traefik.http.routers.tubesync.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
