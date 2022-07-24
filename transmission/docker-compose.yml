@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   transmission:
-    image: ghcr.io/linuxserver/transmission
+    image: lscr.io/linuxserver/transmission
     container_name: transmission
     environment:
       - PUID=1000

@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   znc:
-    image: ghcr.io/linuxserver/znc
+    image: lscr.io/linuxserver/znc
     container_name: znc
     environment:
       - PUID=1000

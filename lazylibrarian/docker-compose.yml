@@ -2,13 +2,13 @@
 version: "2.1"
 services:
   lazylibrarian:
-    image: ghcr.io/linuxserver/lazylibrarian
+    image: lscr.io/linuxserver/lazylibrarian
     container_name: lazylibrarian
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
-      # - DOCKER_MODS=ghcr.io/linuxserver/calibre-web:calibre #optional
+      # - DOCKER_MODS=lscr.io/linuxserver/calibre-web:calibre #optional
     volumes:
       - ./config:/config
       - $DOWNLOADS_FOLDER:/downloads

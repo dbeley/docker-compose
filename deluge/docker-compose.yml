@@ -2,7 +2,7 @@
 version: "2"
 services:
   deluge:
-    image: ghcr.io/linuxserver/deluge
+    image: lscr.io/linuxserver/deluge
     container_name: deluge
     restart: unless-stopped
     # web ui at port 8112

@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   couchpotato:
-    image: ghcr.io/linuxserver/couchpotato
+    image: lscr.io/linuxserver/couchpotato
     container_name: couchpotato
     environment:
       - PUID=1000

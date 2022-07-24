@@ -2,7 +2,7 @@
 version: "2"
 services:
   piwigo:
-    image: ghcr.io/linuxserver/piwigo
+    image: lscr.io/linuxserver/piwigo
     container_name: piwigo
     environment:
       - PUID=1000

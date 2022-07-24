@@ -2,7 +2,7 @@
 version: "2"
 services:
   librespeed:
-    image: ghcr.io/linuxserver/librespeed
+    image: lscr.io/linuxserver/librespeed
     container_name: librespeed
     environment:
       - PUID=1000

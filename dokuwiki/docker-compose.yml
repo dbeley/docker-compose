@@ -2,7 +2,7 @@
 version: "2"
 services:
   dokuwiki:
-    image: ghcr.io/linuxserver/dokuwiki
+    image: lscr.io/linuxserver/dokuwiki
     container_name: dokuwiki
     environment:
       - PUID=1000

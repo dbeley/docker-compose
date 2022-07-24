@@ -2,7 +2,7 @@
 version: "2"
 services:
   pyload:
-    image: ghcr.io/linuxserver/pyload
+    image: lscr.io/linuxserver/pyload
     container_name: pyload
     environment:
       - PUID=1000

@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   deluge:
-    image: ghcr.io/linuxserver/bazarr
+    image: lscr.io/linuxserver/bazarr
     container_name: bazarr
     restart: unless-stopped
     environment:

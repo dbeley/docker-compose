@@ -2,7 +2,7 @@
 version: "2"
 services:
   mariadb:
-    image: ghcr.io/linuxserver/mariadb
+    image: lscr.io/linuxserver/mariadb
     container_name: mariadb
     environment:
       - PUID=1000
