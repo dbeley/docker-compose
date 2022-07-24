@@ -1,0 +1,22 @@
+---
+version: "3"
+services:
+  changedetection:
+    image: ghcr.io/dgtlmoon/changedetection.io
+    container_name: changedetection
+    volumes:
+      - ./datastore:/datastore
+    # ports:
+    #   - 5000:5000
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.changedetection.entrypoints=insecure"
+      - "traefik.http.routers.changedetection.rule=Host(`changedetection.$DOMAIN`)"
+      - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
+      # - "traefik.http.routers.changedetection.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
