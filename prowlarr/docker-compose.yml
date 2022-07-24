@@ -1,0 +1,26 @@
+---
+version: "2.1"
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - .config:/config
+    # ports:
+    #   - 9696:9696
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.entrypoints=insecure"
+      - "traefik.http.routers.sonarr.rule=Host(`prowlarr.$DOMAIN`)"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=9696"
+        # - "traefik.http.routers.sonarr.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
