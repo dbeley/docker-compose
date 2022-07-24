@@ -1,0 +1,26 @@
+---
+version: "3"
+services:
+  sheetable:
+    image: vallezw/sheetable
+    container_name: sheetable
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - CONFIG_PATH=/app/config/
+    volumes:
+      - ./config:/app/config
+    # ports:
+    #   - 80:8080
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sheetable.entrypoints=insecure"
+      - "traefik.http.routers.sheetable.rule=Host(`sheetable.$DOMAIN`)"
+      - "traefik.http.services.sheetable.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.sheetable.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
