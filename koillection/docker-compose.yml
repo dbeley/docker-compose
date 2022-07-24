@@ -1,0 +1,46 @@
+---
+version: '3'
+services:
+    koillection:
+        image: koillection/koillection
+        container_name: koillection
+        restart: unless-stopped
+        # ports:
+        #     - 80:80
+        environment:
+            - DB_DRIVER=pdo_pgsql
+            - DB_NAME=koillection
+            - DB_HOST=db
+            - DB_PORT=5432
+            - DB_USER=$DB_USER
+            - DB_PASSWORD=$DB_PASSWORD
+            - DB_VERSION=12.2
+            - PHP_TZ=Europe/Paris
+            - HTTPS_ENABLED=0
+        depends_on:
+            - db
+        volumes:
+            - ./config:/conf
+            - ./uploads:/uploads
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.koillection.entrypoints=insecure"
+          - "traefik.http.routers.koillection.rule=Host(`koillection.$DOMAIN`)"
+          - "traefik.http.services.koillection.loadbalancer.server.port=80"
+          # - "traefik.http.routers.koillection.tls.certresolver=le"
+    # Warning :  MariaDB is not supported, please see issue here https://github.com/koillection/koillection/issues/253
+    db:
+        image: postgres:latest
+        container_name: db
+        restart: unless-stopped
+        environment:
+            - POSTGRES_DB=koillection
+            - POSTGRES_USER=$DB_USER
+            - POSTGRES_PASSWORD=$DB_PASSWORD
+        volumes:
+            - "./volumes/postgresql:/var/lib/postgresql/data"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
