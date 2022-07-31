@@ -1,0 +1,65 @@
+---
+version: "3"
+services:
+  midarr:
+    image: ghcr.io/midarrlabs/midarr-server:latest
+    container_name: midarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - $RADARR_FOLDER:/radarr/movies/path
+      - $SONARR_FOLDER:/sonarr/shows/path
+    environment:
+#       App config
+      - APP_URL=http://localhost:4000
+      - APP_MAILER_FROM=example@email.com
+#       Database config
+      - DB_USERNAME=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_DATABASE=my_database
+      - DB_HOSTNAME=postgresql
+#       Initialise admin account
+      - SETUP_ADMIN_EMAIL=admin@email.com
+      - SETUP_ADMIN_NAME=admin
+      - SETUP_ADMIN_PASSWORD=$ADMIN_PASSWORD # min length 12
+#       Radarr integration
+      - RADARR_BASE_URL=$RADARR_URL
+      - RADARR_API_KEY=$RADARR_API_KEY
+#       Sonarr integration
+      - SONARR_BASE_URL=$SONARR_URL
+      - SONARR_API_KEY=$SONARR_API_KEY
+#       Sendgrid email integration
+      - SENDGRID_API_KEY=$SENDGRID_API_KEY
+    # ports:
+    #   - 4000:4000
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.midarr.entrypoints=insecure"
+      - "traefik.http.routers.midarr.rule=Host(`midarr.$DOMAIN`)"
+      - "traefik.http.services.midarr.loadbalancer.server.port=4000"
+      # - "traefik.http.routers.midarr.tls.certresolver=le"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+
+  postgresql:
+    container_name: postgresql
+    image: postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - POSTGRES_DB=my_database
+    healthcheck:
+      test: "exit 0"
+
+volumes:
+  database-data:
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
