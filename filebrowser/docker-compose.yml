@@ -5,13 +5,13 @@ services:
     image: filebrowser/filebrowser
     container_name: filebrowser
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Europe/Paris
     volumes:
       - $ROOT_FOLDER:/srv
       - ./filebrowser.db:/database.db
-      - ./.filebrowser.json:/.filebrowser.jsonb
+        # - ./.filebrowser.json:/.filebrowser.json
     # ports:
     #   - 80:80
     restart: unless-stopped

@@ -20,6 +20,9 @@ services:
       - "traefik.http.routers.tubesync.rule=Host(`tubesync.$DOMAIN`)"
       - "traefik.http.services.tubesync.loadbalancer.server.port=4848"
       # - "traefik.http.routers.tubesync.tls.certresolver=le"
+    logging:
+      options:
+        max-size: 50m
 
 networks:
     default:

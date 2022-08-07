@@ -9,6 +9,6 @@ Default password: deluge
 ```
 DEFAULT_NETWORK=traefik-network
 DOMAIN=domain
-DOWNLOADS_FOLDER=/home/user/Downloads
+DOWNLOAD_FOLDER=/home/user/Downloads
 ```
 
