@@ -15,10 +15,10 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.entrypoints=insecure"
-      - "traefik.http.routers.sonarr.rule=Host(`prowlarr.$DOMAIN`)"
-      - "traefik.http.services.sonarr.loadbalancer.server.port=9696"
-        # - "traefik.http.routers.sonarr.tls.certresolver=le"
+      - "traefik.http.routers.prowlarr.entrypoints=insecure"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.$DOMAIN`)"
+      - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
+        # - "traefik.http.routers.prowlarr.tls.certresolver=le"
 
 networks:
     default:

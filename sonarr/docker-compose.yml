@@ -1,8 +1,8 @@
 ---
-version: "2"
+version: "3"
 services:
   sonarr:
-    image: lscr.io/linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
       - PUID=1000
@@ -13,15 +13,15 @@ services:
       - ./config:/config
       - $SERIES_FOLDER:/tv
       - $DOWNLOADS_FOLDER:/downloads
-    # ports:
-    #   - 8989:8989
+        # ports:
+        #   - 8989:8989
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.entrypoints=insecure"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.$DOMAIN`)"
       - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
-        # - "traefik.http.routers.sonarr.tls.certresolver=le"
+      # - "traefik.http.routers.sonarr.tls.certresolver=le"
 
 networks:
     default:
