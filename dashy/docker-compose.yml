@@ -1,0 +1,37 @@
+---
+version: "3.8"
+services:
+  dashy:
+    image: ghcr.io/lissy93/dashy
+    container_name: Dashy
+    # Pass in your config file below, by specifying the path on your host machine
+    volumes:
+      - ./config.yml:/app/public/conf.yml
+    # ports:
+    #   - 4000:80
+    # Set any environmental variables
+    environment:
+      - NODE_ENV=production
+    # Specify your user ID and group ID. You can find this by running `id -u` and `id -g`
+      - UID=1000
+      - GID=1000
+    # Specify restart policy
+    restart: unless-stopped
+    # Configure healthchecks
+    healthcheck:
+      test: ['CMD', 'node', '/app/services/healthcheck']
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashy.entrypoints=insecure"
+      - "traefik.http.routers.dashy.rule=Host(`dashy.$DOMAIN`)"
+      - "traefik.http.services.dashy.loadbalancer.server.port=80"
+      # - "traefik.http.routers.dashy.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
