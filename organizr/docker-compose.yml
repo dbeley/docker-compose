@@ -1,0 +1,27 @@
+---
+version: "3"
+services:
+  organizr:
+    image: organizr/organizr
+    container_name: organizr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - fpm="false"
+      - branch="v2-master"
+    volumes:
+      - ./config:/config
+    # ports:
+    #   - 80:80
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.organizr.entrypoints=insecure"
+      - "traefik.http.routers.organizr.rule=Host(`organizr.$DOMAIN`)"
+      - "traefik.http.services.organizr.loadbalancer.server.port=8096"
+      # - "traefik.http.routers.organizr.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
