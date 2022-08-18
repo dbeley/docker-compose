@@ -1,0 +1,23 @@
+---
+version: "3"
+services:
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
+    container_name: homarr
+    volumes:
+      - ./homarr/configs:/app/data/configs
+      - ./homarr/icons:/app/public/icons
+    # ports:
+    #   - 7575:7575
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homarr.entrypoints=insecure"
+      - "traefik.http.routers.homarr.rule=Host(`homarr.$DOMAIN`)"
+      - "traefik.http.services.homarr.loadbalancer.server.port=7575"
+      # - "traefik.http.routers.homarr.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
