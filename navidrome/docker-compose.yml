@@ -1,0 +1,26 @@
+---
+version: "3"
+services:
+  navidrome:
+    container_name: navidrome
+    image: deluan/navidrome:latest
+    user: 1000:1000
+    environment:
+      - TZ=Europe/Paris
+    volumes:
+      - "./data:/data"
+      - "$MUSIC_FOLDER:/music:ro"
+    # ports:
+    #   - 4533:4533
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.navidrome.entrypoints=insecure"
+      - "traefik.http.routers.navidrome.rule=Host(`navidrome.$DOMAIN`)"
+      - "traefik.http.services.navidrome.loadbalancer.server.port=4533"
+        # - "traefik.http.routers.navidrome.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
