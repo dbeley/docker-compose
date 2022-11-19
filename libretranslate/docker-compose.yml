@@ -8,8 +8,6 @@ services:
     environment:
       - LT_FRONTEND_LANGUAGE_SOURCE=en
       - LT_FRONTEND_LANGUAGE_TARGET=fr
-    volumes:
-      - $MUSIC_FOLDER:/var/music
     # ports:
     #   - 5000:5000
     restart: always
