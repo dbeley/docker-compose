@@ -3,7 +3,7 @@ version: "3"
 services:
   libretranslate:
     container_name: libretranslate
-    image: libretranslate/libretranslate-advanced:latest
+    image: libretranslate/libretranslate:latest
     user: 1000:1000
     environment:
       - LT_FRONTEND_LANGUAGE_SOURCE=en
