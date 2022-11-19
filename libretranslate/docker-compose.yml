@@ -1,0 +1,26 @@
+---
+version: "3"
+services:
+  libretranslate:
+    container_name: libretranslate
+    image: libretranslate/libretranslate-advanced:latest
+    user: 1000:1000
+    environment:
+      - LT_FRONTEND_LANGUAGE_SOURCE=en
+      - LT_FRONTEND_LANGUAGE_TARGET=fr
+    volumes:
+      - $MUSIC_FOLDER:/var/music
+    # ports:
+    #   - 5000:5000
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.libretranslate.entrypoints=insecure"
+      - "traefik.http.routers.libretranslate.rule=Host(`libretranslate.$DOMAIN`)"
+      - "traefik.http.services.libretranslate.loadbalancer.server.port=5000"
+        # - "traefik.http.routers.libretranslate.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
