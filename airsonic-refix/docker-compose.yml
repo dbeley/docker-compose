@@ -4,7 +4,6 @@ services:
   airsonicrefix:
     container_name: airsonicrefix
     image: tamland/airsonic-refix:latest
-    user: 1000:1000
     environment:
       - TZ=Europe/Paris
       - SERVER_URL=$AIRSONIC_URL

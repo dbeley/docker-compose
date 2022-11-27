@@ -4,7 +4,6 @@ services:
   libretranslate:
     container_name: libretranslate
     image: libretranslate/libretranslate:latest
-    user: 1000:1000
     environment:
       - LT_FRONTEND_LANGUAGE_SOURCE=en
       - LT_FRONTEND_LANGUAGE_TARGET=fr

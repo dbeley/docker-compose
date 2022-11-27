@@ -1,0 +1,5 @@
+# navidrome
+
+```
+mkdir data
+```

@@ -18,7 +18,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.organizr.entrypoints=insecure"
       - "traefik.http.routers.organizr.rule=Host(`organizr.$DOMAIN`)"
-      - "traefik.http.services.organizr.loadbalancer.server.port=8096"
+      - "traefik.http.services.organizr.loadbalancer.server.port=80"
       # - "traefik.http.routers.organizr.tls.certresolver=le"
 
 networks:

@@ -3,6 +3,7 @@ version: "3"
 services:
   gonic:
     image: sentriz/gonic:latest
+    user: 1000:1000
     environment:
       - TZ=Europe/Paris
     # optionally, see more env vars below
