@@ -1,0 +1,33 @@
+---
+version: "3"
+services:
+  gonic:
+    image: sentriz/gonic:latest
+    environment:
+      - TZ=Europe/Paris
+    # optionally, see more env vars below
+    expose:
+      - 80
+    volumes:
+      - ./data:/data # gonic db etc
+      - $MUSIC_FOLDER:/music:ro # your music
+      - $PODCAST_FOLDER:/podcasts # your podcasts
+      - $CACHE_FOLDER:/cache # transcode / covers / etc cache dir
+
+    # set the following two sections if you've enabled jukebox
+    group_add:
+      - audio
+    devices:
+      - /dev/snd:/dev/snd
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gonic.entrypoints=insecure"
+      - "traefik.http.routers.gonic.rule=Host(`gonic.$DOMAIN`)"
+      - "traefik.http.services.gonic.loadbalancer.server.port=80"
+        # - "traefik.http.routers.gonic.tls.certresolver=le"
+
+networks:
+    default:
+        external:
+            name: $DEFAULT_NETWORK
