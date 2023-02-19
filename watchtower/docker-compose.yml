@@ -4,19 +4,8 @@ services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
-    # ports:
-    #   - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    # restart: unless-stopped
-#     labels:
-#       - "traefik.enable=false"
-#         # - "traefik.http.routers.watchtower.entrypoints=insecure"
-#         # - "traefik.http.routers.watchtower.rule=Host(`watchtower.$DOMAIN`)"
-#         # - "traefik.http.services.watchtower.loadbalancer.server.port=3443"
-#         # - "traefik.http.routers.watchtower.tls.certresolver=le"
-#
-# networks:
-#     default:
-#         external:
-#             name: $DEFAULT_NETWORK
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_SCHEDULE=36 3 0 * * 0
