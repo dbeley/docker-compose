@@ -13,7 +13,7 @@ services:
     volumes:
       - firefly_iii_upload:/var/www/firefly-iii/storage/upload
     restart: always
-    depends-on:
+    depends_on:
       - db
     labels:
       - "traefik.enable=true"
@@ -38,7 +38,7 @@ services:
 
 volumes:
   firefly_iii_upload:
-  db:
+  firefly_iii_db:
 
 networks:
     default:

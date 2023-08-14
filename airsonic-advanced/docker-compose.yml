@@ -3,7 +3,7 @@ version: "3"
 services:
   airsonicadvanced:
     container_name: airsonicadvanced
-    image: airsonicadvanced/airsonic-advanced:latest
+    image: ghcr.io/kagemomiji/airsonic-advanced:latest
     user: 1000:1000
     environment:
       - TZ=Europe/Paris
@@ -25,5 +25,5 @@ services:
 
 networks:
     default:
-        external:
-            name: $DEFAULT_NETWORK
+        name: $DEFAULT_NETWORK
+        external: true

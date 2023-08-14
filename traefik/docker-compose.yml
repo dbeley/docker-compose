@@ -15,10 +15,14 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./traefik.yml:/traefik.yml"
+      - "./traefik.yml:/etc/traefik/traefik.yml"
+      # - "./config.yml:/etc/traefik/config.yml"
+      # - "./certs:/etc/certs:ro"
       # - "./acme.json:/acme.json"
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.traefik=true"
+      - "traefik.http.routers.traefik.tls=true"
       ## HTTP REDIRECT
       # - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       # - "traefik.http.routers.redirect-https.rule=hostregexp(`{host:.+}`)"

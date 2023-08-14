@@ -1,24 +1,41 @@
 #Traefik.yml
 
 log:
-    level: INFO
+  level: INFO
+  format: common
 
 api:
-    insecure: true
-    dashboard: true
+  insecure: true
+  dashboard: true
 
 #Define HTTP and HTTPS entrypoints
 entryPoints:
   insecure:
     address: ":80"
-#   secure:
-#     address: ":443"
+      # http:
+      #   middlewares:
+      #     test-redirectscheme:
+      #       redirectScheme:
+      #         scheme: https
+      #         permanent: true
+      # http:
+      #   redirections:
+      #     entrypoint:
+      #       to: secure
+      #       scheme: https
+      # secure:
+      #   address: ":443"
 
 #Dynamic configuration will come from docker labels
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
+    watch: true
+
+  file:
+    filename: /etc/traefik/config.yml
+    watch: true
 
 certificatesResolvers:
   le:
@@ -26,5 +43,8 @@ certificatesResolvers:
       #caServer: https://acme-staging-v02.api.letsencrypt.org/directory
       storage: /acme.json
       email: dbeley@protonmail.com
+      # dnsChallenge:
+      #   provider: ovh
+      #   delayBeforeCheck: 0
       httpChallenge:
         entryPoint: insecure
