@@ -1,7 +1,4 @@
 ---
-version: "2"
-services:
----
 version: "3"
 services:
   slskd:
