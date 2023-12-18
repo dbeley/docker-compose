@@ -11,7 +11,7 @@
 version: '3'
 services:
   shaarli:
-    image: shaarli/shaarli:master
+    image: shaarli/shaarli:latest
     container_name: shaarli
     environment:
       - PUID=1000
