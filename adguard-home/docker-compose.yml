@@ -4,9 +4,6 @@ services:
   adguardhome:
     image: adguard/adguardhome
     container_name: adguardhome
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - ./conf:/conf
       - ./work:/work

@@ -4,10 +4,6 @@ services:
   n8n:
     image: n8nio/n8n
     container_name: n8n
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
     volumes:
       - ./n8n:/root/.n8n
     # ports:

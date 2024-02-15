@@ -5,8 +5,6 @@ services:
     image: vallezw/sheetable
     container_name: sheetable
     environment:
-      - PUID=1000
-      - PGID=1000
       - CONFIG_PATH=/app/config/
     volumes:
       - ./config:/app/config

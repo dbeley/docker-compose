@@ -5,10 +5,6 @@ services:
     image: netdata/netdata
     container_name: netdata
     hostname: docker.home
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro

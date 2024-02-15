@@ -5,9 +5,6 @@ services:
     image: pihole/pihole:latest
     container_name: pihole
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ='Europe/Paris'
       - WEBPASSWORD=$WEB_PASSWORD
       - DNS1=$DNS1
       - DNS2=$DNS2

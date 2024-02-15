@@ -4,10 +4,6 @@ services:
   beehive:
     image: fribbledom/beehive
     container_name: beehive
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
     # ports:
     #   - 8181:8181
     restart: unless-stopped

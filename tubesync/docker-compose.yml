@@ -10,10 +10,6 @@ services:
     volumes:
       - ./config:/config
       - $DOWNLOAD_FOLDER:/downloads
-    environment:
-      - TZ=Europe/Paris
-      - PUID=1000
-      - PGID=1000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.tubesync.entrypoints=insecure"

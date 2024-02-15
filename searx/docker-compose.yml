@@ -5,8 +5,6 @@ services:
     image: wonderfall/searx
     container_name: searx
     environment:
-      # - PUID=1000
-      # - PGID=1000
       - TZ=Europe/Paris
     # ports:
     #   - 8888:8888
