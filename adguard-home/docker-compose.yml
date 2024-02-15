@@ -5,8 +5,8 @@ services:
     image: adguard/adguardhome
     container_name: adguardhome
     volumes:
-      - ./conf:/conf
-      - ./work:/work
+      - ./conf:/opt/adguardhome/conf
+      - ./work:/opt/adguardhome/work
     ports:
         # DNS
         - 53:53
