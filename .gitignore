@@ -18,3 +18,15 @@ dokuwiki/config*
 lychee/lychee
 spleeter/input
 spleeter/output
+actualbudget/actual-data/
+actualbudget/cert.pem
+actualbudget/key.pem
+immich/library
+immich/postgres
+slskd/app
+slskd/downloads
+slskd/slskd.yml
+traefik/certs
+koillection/volumes
+homarr/homarr
+changedetection/datastore
