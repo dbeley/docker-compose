@@ -4,10 +4,6 @@ services:
   code-server:
     image: codercom/code-server:latest
     container_name: code-server
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
     volumes:
       - $CONFIG:/home/coder/.config
       - $PWD:/home/coder/project

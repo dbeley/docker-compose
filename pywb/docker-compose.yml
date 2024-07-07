@@ -4,11 +4,6 @@ services:
   pywb:
     image: webrecorder/pywb
     container_name: pywb
-    environment:
-      # - PUID=1000
-      # - PGID=1000
-      - TZ=Europe/Paris
-      # - UMASK=022 #optional
     volumes:
       - ./data:/webarchive
     # ports:

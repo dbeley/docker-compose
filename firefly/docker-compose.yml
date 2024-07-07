@@ -4,11 +4,6 @@ services:
   fireflyiii:
     image: fireflyiii/core:latest
     container_name: fireflyiii
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-      # - UMASK_SET=022 #optional
     env_file: .env_firefly
     volumes:
       - firefly_iii_upload:/var/www/firefly-iii/storage/upload

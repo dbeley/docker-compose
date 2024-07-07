@@ -5,8 +5,6 @@ services:
     image: organizr/organizr
     container_name: organizr
     environment:
-      - PUID=1000
-      - PGID=1000
       - fpm="false"
       - branch="v2-master"
     volumes:

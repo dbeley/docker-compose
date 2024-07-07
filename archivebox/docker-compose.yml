@@ -8,9 +8,6 @@ services:
     tty: true
     container_name: archivebox
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
       - USE_COLOR=True
       - SHOW_PROGRESS=False
       - TIMEOUT=120

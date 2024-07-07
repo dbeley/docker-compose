@@ -6,7 +6,11 @@ services:
     image: deluan/navidrome:latest
     user: 1000:1000
     environment:
-      - TZ=Europe/Paris
+      - ND_DEFAULTLANGUAGE=fr
+      - ND_LASTFM_ENABLED=true
+      - ND_LASTFM_APIKEY=$ND_LASTFM_APIKEY
+      - ND_LASTFM_SECRET=$ND_LASTFM_SECRET
+      - ND_SCANSCHEDULE=$ND_SCANSCHEDULE
     volumes:
       - "./data:/data"
       - "$MUSIC_FOLDER:/music:ro"

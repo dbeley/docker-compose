@@ -23,8 +23,8 @@ entryPoints:
       #     entrypoint:
       #       to: secure
       #       scheme: https
-      # secure:
-      #   address: ":443"
+  secure:
+    address: ":443"
 
 #Dynamic configuration will come from docker labels
 providers:

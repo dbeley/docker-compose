@@ -4,25 +4,21 @@ services:
   adguardhome:
     image: adguard/adguardhome
     container_name: adguardhome
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
-      - ./conf:/conf
-      - ./work:/work
+      - ./conf:/opt/adguardhome/conf
+      - ./work:/opt/adguardhome/work
     ports:
         # DNS
         - 53:53
           # # DHCP server
           # - 67:67/udp
-          # - 68:68/tcp
           # - 68:68/udp
           # # HTTPS/DNS-over-HTTPS
           # - 443:443/tcp
           # # DNS-over-TLS
           # - 853:853/tcp
           # # DNS-over-QUIC
-          # - 784:784/udp
+          # - 853:853/udp
           # # DNSCrypt
           # - 5443:5443/tcp
           # - 5443:5443/udp

@@ -4,10 +4,6 @@ services:
   miniserve:
     image: svenstaro/miniserve
     container_name: miniserve
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
     volumes:
       - $DATA_FOLDER:/tmp
     # ports:
