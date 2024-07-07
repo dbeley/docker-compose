@@ -1,0 +1,5 @@
+# dashy
+
+```
+touch config.yml
+```
