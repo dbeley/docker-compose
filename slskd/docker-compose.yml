@@ -1,30 +1,31 @@
 ---
-version: "2"
-services:
----
 version: "3"
 services:
   slskd:
     image: slskd/slskd
     container_name: slskd
-    ports:
-    #  - "5030:5030"
-    #  - "5031:5031"
-      - "50300:50300"
+    # ports:
+    #   - "5030:5030"
+    #   - "5031:5031"
+    #   - "50300:50300"
     environment:
-      - SLSKD_REMOTE_CONFIGURATION=true
+      - PUID=1000
+      - PGID=1000
+      - UMASK=022
+      # - SLSKD_REMOTE_CONFIGURATION=true
     volumes:
       - ./app:/app
-    restart: always
+      - ./downloads:/downloads
+      - $SHARED_FOLDER:/share:ro
     restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.slskd.entrypoints=insecure"
-      - "traefik.http.routers.slskd.rule=Host(`slskd.$DOMAIN`)"
-      - "traefik.http.services.slskd.loadbalancer.server.port=5030"
-      # - "traefik.http.routers.slskd.tls.certresolver=le"
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.slskd.entrypoints=insecure"
+    #   - "traefik.http.routers.slskd.rule=Host(`slskd.$DOMAIN`)"
+    #   - "traefik.http.services.slskd.loadbalancer.server.port=5030"
+    #   # - "traefik.http.routers.slskd.tls.certresolver=le"
 
 networks:
     default:
-        external:
-            name: $DEFAULT_NETWORK
+        name: $DEFAULT_NETWORK
+        external: true
