@@ -1,5 +1,4 @@
 ---
-version: "2.1"
 services:
   calibre-web:
     image: lscr.io/linuxserver/calibre-web

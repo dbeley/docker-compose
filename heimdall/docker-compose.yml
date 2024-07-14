@@ -1,5 +1,4 @@
 ---
-version: "2"
 services:
   heimdall:
     image: lscr.io/linuxserver/heimdall:latest

@@ -8,7 +8,6 @@
 # Environment variables:
 # - SHAARLI_VIRTUAL_HOST      Fully Qualified Domain Name for the Shaarli instance
 # - SHAARLI_LETSENCRYPT_EMAIL Contact email for certificate renewal
-version: '3'
 services:
   shaarli:
     image: shaarli/shaarli:latest

@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   organizr:
     image: organizr/organizr

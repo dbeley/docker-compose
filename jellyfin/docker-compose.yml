@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin

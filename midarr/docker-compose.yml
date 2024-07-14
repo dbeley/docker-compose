@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   midarr:
     image: ghcr.io/midarrlabs/midarr-server:latest

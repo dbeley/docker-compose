@@ -1,5 +1,4 @@
 ---
-version: "2"
 services:
   bookstack:
     image: lscr.io/linuxserver/bookstack

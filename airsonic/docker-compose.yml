@@ -1,5 +1,4 @@
 ---
-version: "2"
 services:
   airsonic:
     image: lscr.io/linuxserver/airsonic

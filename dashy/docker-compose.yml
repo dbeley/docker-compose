@@ -1,5 +1,4 @@
 ---
-version: "3.8"
 services:
   dashy:
     image: ghcr.io/lissy93/dashy

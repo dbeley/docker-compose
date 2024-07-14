@@ -1,5 +1,4 @@
 ---
-version: "2"
 services:
   letsencrypt:
     image: lscr.io/linuxserver/letsencrypt

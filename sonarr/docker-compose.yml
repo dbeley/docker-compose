@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest

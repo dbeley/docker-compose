@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   homarr:
     image: ghcr.io/ajnart/homarr:latest

@@ -1,5 +1,4 @@
 ---
-version: "2"
 services:
   pyload:
     image: lscr.io/linuxserver/pyload

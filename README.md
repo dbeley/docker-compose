@@ -26,17 +26,17 @@ If you don't want to use traefik, comment the labels/networks and uncomments the
 Run a docker-compose file
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 Stop
 
 ```
-docker-compose down
+docker compose down
 ```
 
 Pull a newer version of the docker image
 
 ```
-docker-compose pull
+docker compose pull
 ```

@@ -7,7 +7,6 @@
 #   build cmd: COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build
 #   run cmd: docker-compose up -d
 
-version: '2.1'
 services:
   proxy:
     image: reallibrephotos/librephotos-proxy:dev

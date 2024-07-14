@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   gonic:
     image: sentriz/gonic:latest

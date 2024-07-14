@@ -1,5 +1,4 @@
 ---
-version: "2.1"
 services:
   couchpotato:
     image: lscr.io/linuxserver/couchpotato

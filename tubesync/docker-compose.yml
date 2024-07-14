@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   tubesync:
     image: ghcr.io/meeb/tubesync:latest

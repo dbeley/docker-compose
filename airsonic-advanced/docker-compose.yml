@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   airsonicadvanced:
     container_name: airsonicadvanced

@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   navidrome:
     container_name: navidrome
