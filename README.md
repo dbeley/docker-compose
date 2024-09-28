@@ -43,14 +43,14 @@ docker compose pull
 
 ## Some highlights
 
-- *adguard-home*: network-wide ad-blocker
-- *dokuwiki*: still the best wiki out there
-- *filebrowser*: a very neat web file browser
-- *jellyfin*: media streamer
-- *navidrome*: the best subsonic-compatible music server (trust me I tested them all)
-- *paperless-ngx*: a great document organizer
-- *shaarli*: small bookmarking service
-- *slskd*: great software to share files through Soulseek
-- *wallabag*: another bookmarking service with a lot of features
-- *watchtower*: automatically updates your running docker images
+- **adguard-home**: network-wide ad-blocker
+- **dokuwiki**: still the best wiki out there
+- **filebrowser**: a very neat web file browser
+- **jellyfin**: media streamer
+- **navidrome**: the best subsonic-compatible music server (trust me I tested them all)
+- **paperless-ngx**: a great document organizer
+- **shaarli**: small bookmarking service
+- **slskd**: great software to share files through Soulseek
+- **wallabag**: another bookmarking service with a lot of features
+- **watchtower**: automatically updates your running docker images
 
