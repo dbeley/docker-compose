@@ -1,0 +1,57 @@
+---
+services:
+  bitmagnet:
+    image: ghcr.io/bitmagnet-io/bitmagnet:latest
+    container_name: bitmagnet
+    ports:
+      # API and WebUI port:
+      # - "3333:3333"
+      # BitTorrent ports:
+      - "3334:3334/tcp"
+      - "3334:3334/udp"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    #      - TMDB_API_KEY=your_api_key
+    command:
+      - worker
+      - run
+      - --keys=http_server
+      - --keys=queue_server
+      # disable the next line to run without DHT crawler
+      - --keys=dht_crawler
+    depends_on:
+      postgres:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bitmagnet.entrypoints=insecure"
+      - "traefik.http.routers.bitmagnet.rule=Host(`bitmagnet.$DOMAIN`)"
+      - "traefik.http.services.bitmagnet.loadbalancer.server.port=3333"
+      # - "traefik.http.routers.bitmagnet.tls.certresolver=le"
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: bitmagnet-postgres
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    #    ports:
+    #      - "5432:5432" Expose this port if you'd like to dig around in the database
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=bitmagnet
+      - PGUSER=postgres
+    shm_size: 1g
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready
+      start_period: 20s
+      interval: 10s
+
+networks:
+    default:
+        name: $DEFAULT_NETWORK
+        external: true

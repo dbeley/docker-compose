@@ -1,0 +1,26 @@
+---
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
+    volumes:
+      - ./training_data:/usr/share/tessdata
+      - ./extra_config:/configs
+    # ports:
+    #   - 8000:8000
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=en_GB,fr_FR
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stirling-pdf.entrypoints=insecure"
+      - "traefik.http.routers.stirling-pdf.rule=Host(`stirling-pdf.$DOMAIN`)"
+      - "traefik.http.services.stirling-pdf.loadbalancer.server.port=8000"
+      # - "traefik.http.routers.stirling-pdf.tls.certresolver=le"
+
+networks:
+    default:
+        name: $DEFAULT_NETWORK
+        external: true
