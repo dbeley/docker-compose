@@ -1,0 +1,30 @@
+---
+services:
+  jamulus:
+    image: grundic/jamulus
+    container_name: jamulus
+    environment:
+      TZ: "Europe/Paris"  
+    volumes:
+      - ./config:/config
+    # ports:
+    #   - 22124:22124
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jamulus.entrypoints=insecure"
+      - "traefik.http.routers.jamulus.rule=Host(`jamulus.$DOMAIN`)"
+      - "traefik.http.services.jamulus.loadbalancer.server.port=22124"
+      # - "traefik.http.routers.jamulus.tls.certresolver=le"
+    entrypoint:
+      - "Jamulus"
+      - "--server"
+      - "--nogui"
+      - "--welcomemessage"
+      - "Welcome to David B's room"
+      - "--numchannels"
+      - "16"
+networks:
+    default:
+        name: $DEFAULT_NETWORK
+        external: true
