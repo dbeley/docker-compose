@@ -1,0 +1,53 @@
+---
+services:
+  maybe:
+    image: ghcr.io/maybe-finance/maybe:latest
+    container_name: maybe
+    environment:
+      SELF_HOSTED: "true"
+      RAILS_FORCE_SSL: "false"
+      RAILS_ASSUME_SSL: "false"
+      GOOD_JOB_EXECUTION_MODE: async
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?}
+      DB_HOST: postgres
+      POSTGRES_DB: ${POSTGRES_DB:-maybe_production}
+      POSTGRES_USER: ${POSTGRES_USER:-maybe_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+    volumes:
+      - app-storage:/rails/storage
+    # ports:
+    #   - 3000:3000
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maybe.entrypoints=insecure"
+      - "traefik.http.routers.maybe.rule=Host(`maybe.$DOMAIN`)"
+      - "traefik.http.services.maybe.loadbalancer.server.port=3000"
+      # - "traefik.http.routers.maybe.tls.certresolver=le"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-maybe_user}
+      POSTGRES_DB: ${POSTGRES_DB:-maybe_production}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  app-storage:
+  postgres-data:
+
+networks:
+    default:
+        name: $DEFAULT_NETWORK
+        external: true
