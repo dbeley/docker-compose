@@ -88,7 +88,7 @@ services:
         expose:
             - 27017
         volumes:
-            - ~/mongo_data:/data/db
+            - $HOME/mongo_data:/data/db
         healthcheck:
             test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
             interval: 10s
@@ -102,7 +102,7 @@ services:
         expose:
             - 6379
         volumes:
-            - ~/redis_data:/data
+            - $HOME/redis_data:/data
 
     # ldap:
     #    restart: always
