@@ -4,7 +4,7 @@ services:
     image: photoprism/photoprism:latest
     restart: unless-stopped
     container_name: photoprism
-        # user: "1000:1000"
+    # user: "1000:1000"
     security_opt:
       - seccomp:unconfined
       - apparmor:unconfined
@@ -56,14 +56,14 @@ services:
       # UMASK: 0000
     volumes:
       # Storage folder for settings, index & sidecar files (DON'T REMOVE):
-      - "~/.photoprism:/photoprism/storage"
+      - "$HOME/.photoprism:/photoprism/storage"
       # Your personal photo and video collection ([local path]:[container path]):
-      - "~/Pictures:/photoprism/originals"
+      - "$HOME/Pictures:/photoprism/originals"
       # Multiple folders can be indexed by mounting them as subfolders of /photoprism/originals:
-      # - "~/Family:/photoprism/originals/Family"    # [folder_1]:/photoprism/originals/[folder_1]
-      # - "~/Friends:/photoprism/originals/Friends"  # [folder_2]:/photoprism/originals/[folder_2]
+      # - "$HOME/Family:/photoprism/originals/Family"    # [folder_1]:/photoprism/originals/[folder_1]
+      # - "$HOME/Friends:/photoprism/originals/Friends"  # [folder_2]:/photoprism/originals/[folder_2]
       # Mounting the import folder is optional (see docs):
-      # - "~/Import:/photoprism/import"
+      # - "$HOME/Import:/photoprism/import"
     # Uncomment the following lines to use MariaDB instead of SQLite for improved performance & scalability:
     #
     #  mariadb:
