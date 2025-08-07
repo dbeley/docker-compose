@@ -21,10 +21,10 @@ A curated collection of `docker-compose` files to help you spin up your own self
 1. Choose a service folder (e.g. `jellyfin`).
 2. Create a `.env` file next to the `docker-compose.yml`. Example:
    ```env
-   DATA_FOLDER=/path/to/data
    DEFAULT_NETWORK=traefik-network
    DOMAIN=yourdomain.home
    ... # depending on the service you might need more variables, see the included README.md if it exists
+   DATA_FOLDER=/path/to/data
    ```
    `DEFAULT_NETWORK` and `DOMAIN` are only required if you use Traefik.
 3. Start the container:
