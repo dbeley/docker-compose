@@ -1,56 +1,67 @@
 # docker-compose
 
-A collection of docker-compose files for your self-hosting needs!
+## Features
 
-I personally use those files with the traefik reverse proxy. If you don't use it, just comment the labels and networks sections related to traefik (you also might have to add/uncomment the ports section).
+A curated collection of `docker-compose` files to help you spin up your own self-hosted services. Each service lives in its own folder with a `docker-compose.yml` and sample environment file.
 
-If you see variables like `$DATA_FOLDER` in a docker-compose.yml file, just put a file called `.env` in the same directory as the `docker-compose.yml` file with this content:
+- 80+ ready-to-use service definitions
+- Out-of-the-box [Traefik](https://traefik.io/) reverse proxy labels
+- Uses `.env` files for clean configuration
+- Minimal defaults that you can easily customize
+
+## Getting Started
+
+### Requirements
+
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+- Optional: a running [Traefik](https://traefik.io/) instance
+
+### Running a Service
+
+1. Choose a service folder (e.g. `jellyfin`).
+2. Create a `.env` file next to the `docker-compose.yml`. Example:
+   ```env
+   DATA_FOLDER=/path/to/data
+   DEFAULT_NETWORK=traefik-network
+   DOMAIN=yourdomain.home
+   ... # depending on the service you might need more variables, see the included README.md if it exists
+   ```
+   `DEFAULT_NETWORK` and `DOMAIN` are only required if you use Traefik.
+3. Start the container:
+   ```bash
+   docker compose up -d
+   ```
+
+### Not using Traefik?
+
+- Comment out the `labels` and `networks` sections.
+- Uncomment the `ports` section to expose services directly.
+
+### Managing Containers
+
+```bash
+docker compose down  # stop
+docker compose pull  # update image
+docker compose up -d # run
 ```
-DATA_FOLDER=/path/to/data
-```
 
-## Usage
+## Highlights
 
-If you want to use traefik, start the traefik container first and create a `.env` file in every subfolder you use containing the following
+- **AdGuard Home** – network-wide ad-blocker
+- **Dokuwiki** – flexible wiki software
+- **Filebrowser** – simple web file manager
+- **Jellyfin** – media server
+- **Navidrome** – Subsonic-compatible music server
+- **Paperless-NGX** – document management
+- **Shaarli** – minimalist bookmarking service
+- **slskd** – Soulseek file sharing client
+- **Wallabag** – read-it-later service
+- **Watchtower** – automatic container updater
 
-```
-DEFAULT_NETWORK=traefik-network
-DOMAIN=yourdomain.home
-```
+## Contributing
 
-Depending on the container, you might have to create an `.env` file and fill in variables for the container to work (i.e. to set up export folder) even if you don't use traefik.
+Issues and pull requests are welcome! I don't use all the services at once so some services might not be up-to-date, feel free to submit new services or improvements.
 
-If you don't want to use traefik, comment the labels/networks and uncomments the ports to use plain docker.
+## License
 
-
-Run a docker-compose file
-
-```
-docker compose up -d
-```
-
-Stop
-
-```
-docker compose down
-```
-
-Pull a newer version of the docker image
-
-```
-docker compose pull
-```
-
-## Some highlights
-
-- **adguard-home**: network-wide ad-blocker
-- **dokuwiki**: still the best wiki out there
-- **filebrowser**: a very neat web file browser
-- **jellyfin**: media streamer
-- **navidrome**: the best subsonic-compatible music server (trust me I tested them all)
-- **paperless-ngx**: a great document organizer
-- **shaarli**: small bookmarking service
-- **slskd**: great software to share files through Soulseek
-- **wallabag**: another bookmarking service with a lot of features
-- **watchtower**: automatically updates your running docker images
-
+MIT
