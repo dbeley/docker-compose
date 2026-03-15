@@ -13,13 +13,13 @@ services:
     image: reallibrephotos/librephotos-proxy:dev
     tty: true
     container_name: librephotos-proxy
-    restart: always
+    restart: unless-stopped
     ports:
       - "3000:80"
   librephotos-db:
     image: postgres
     container_name: librephotos-db
-    restart: always
+    restart: unless-stopped
     environment:
     # This db password is internal, you can change it if you want, but also change it in librephotos-backend container
       - POSTGRES_USER=docker
@@ -38,14 +38,14 @@ services:
     # For development uncomment the "build" line below and comment the "image" line above
     # build: ../librephotos-frontend
     container_name: librephotos-frontend
-    restart: always
+    restart: unless-stopped
     tty: true
   backend:
     image: reallibrephotos/librephotos:dev
     # For development uncomment the "build" line below and comment the "image" line above
     # build: .
     container_name: librephotos-backend
-    restart: always
+    restart: unless-stopped
     volumes:
       - $LIBREPHOTOS_PHOTOS:/data
       - $LIBREPHOTOS_MEDIA:/code/protected_media
@@ -84,4 +84,4 @@ services:
   librephotos-redis:
     image: redis:alpine
     container_name: librephotos-redis
-    restart: always
+    restart: unless-stopped
