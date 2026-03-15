@@ -5,7 +5,7 @@ services:
     container_name: grafana
     # ports:
     #  - 3000:3000
-    restart: always
+    restart: unless-stopped
     environment:
       GF_SECURITY_ADMIN_USER: $GF_SECURITY_ADMIN_USER
       GF_SECURITY_ADMIN_PASSWORD: $GF_SECURITY_ADMIN_PASSWORD
