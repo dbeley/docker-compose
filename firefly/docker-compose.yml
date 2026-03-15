@@ -6,7 +6,7 @@ services:
     env_file: .env_firefly
     volumes:
       - firefly_iii_upload:/var/www/firefly-iii/storage/upload
-    restart: always
+    restart: unless-stopped
     depends_on:
       - db
     labels:
@@ -26,7 +26,7 @@ services:
       - MYSQL_USER=firefly
       - MYSQL_PASSWORD=$MYSQL_PASSWORD
       - MYSQL_DATABASE=firefly
-    restart: always
+    restart: unless-stopped
     volumes:
       - firefly_iii_db:/var/lib/mysql
 
