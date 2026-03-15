@@ -30,12 +30,14 @@
 services:
   broker:
     image: docker.io/library/redis:7
+    container_name: paperless_broker
     restart: unless-stopped
     volumes:
       - redisdata:/data
 
   db:
     image: docker.io/library/postgres:15
+    container_name: paperless_db
     restart: unless-stopped
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -46,6 +48,7 @@ services:
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless
     restart: unless-stopped
     depends_on:
       - db
