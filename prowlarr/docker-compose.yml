@@ -17,7 +17,7 @@ services:
       - "traefik.http.routers.prowlarr.entrypoints=insecure"
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.$DOMAIN`)"
       - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
-        # - "traefik.http.routers.prowlarr.tls.certresolver=le"
+      # - "traefik.http.routers.prowlarr.tls.certresolver=le"
 
 networks:
   default:
