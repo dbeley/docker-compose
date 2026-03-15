@@ -21,7 +21,7 @@ services:
       - "traefik.http.routers.navidrome.entrypoints=insecure"
       - "traefik.http.routers.navidrome.rule=Host(`navidrome.$DOMAIN`)"
       - "traefik.http.services.navidrome.loadbalancer.server.port=4533"
-        # - "traefik.http.routers.navidrome.tls.certresolver=le"
+      # - "traefik.http.routers.navidrome.tls.certresolver=le"
 
 networks:
   default:
