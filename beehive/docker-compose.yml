@@ -11,7 +11,7 @@ services:
       - "traefik.http.routers.beehive.entrypoints=insecure"
       - "traefik.http.routers.beehive.rule=Host(`beehive.$DOMAIN`)"
       - "traefik.http.services.beehive.loadbalancer.server.port=8181"
-        # - "traefik.http.routers.beehive.tls.certresolver=le"
+      # - "traefik.http.routers.beehive.tls.certresolver=le"
 
 networks:
   default:
