@@ -2,7 +2,7 @@
 services:
   postgres-db:
     image: postgres
-    restart: always
+    restart: unless-stopped
     environment:
       - "POSTGRES_USER=metabase"
       - "POSTGRES_DB=metabase"
@@ -12,6 +12,7 @@ services:
       - ./pgdata:/var/lib/postgresql/data
   metabase-app:
     image: metabase/metabase
+    restart: unless-stopped
     # ports:
     #   - "3000:3000"
     volumes:
