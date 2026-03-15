@@ -15,7 +15,7 @@ services:
       - "$MUSIC_FOLDER:/music:ro"
     # ports:
     #   - 4533:4533
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.navidrome.entrypoints=insecure"
