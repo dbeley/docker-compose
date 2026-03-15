@@ -22,6 +22,7 @@ services:
       # - "traefik.http.routers.piwigo.tls.certresolver=le"
   piwigo_db:
     image: mariadb
+    container_name: piwigo_db
     restart: unless-stopped
     volumes:
       - piwigo_db:/var/lib/mysql
