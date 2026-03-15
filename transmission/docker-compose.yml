@@ -24,7 +24,7 @@ services:
       - "traefik.http.routers.transmission.entrypoints=insecure"
       - "traefik.http.routers.transmission.rule=Host(`transmission.$DOMAIN`)"
       - "traefik.http.services.transmission.loadbalancer.server.port=9091"
-        # - "traefik.http.routers.transmission.tls.certresolver=le"
+      # - "traefik.http.routers.transmission.tls.certresolver=le"
 
 networks:
   default:
