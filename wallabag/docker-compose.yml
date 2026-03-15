@@ -20,6 +20,7 @@ services:
       - /opt/wallabag/images:/var/www/wallabag/web/assets/images
     depends_on:
       - db
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wallabag.entrypoints=insecure"
@@ -28,12 +29,14 @@ services:
       # - "traefik.http.routers.wallabag.tls.certresolver=le"
   db:
     image: mariadb
+    restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=$WALLABAG_DB_ROOT_PASSWORD
     volumes:
       - /opt/wallabag/data:/var/lib/mysql
   redis:
     image: redis:alpine
+    restart: unless-stopped
 
 networks:
   default:
