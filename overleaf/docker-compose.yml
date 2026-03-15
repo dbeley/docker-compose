@@ -1,7 +1,7 @@
 ---
 services:
     overleaf:
-        restart: always
+        restart: unless-stopped
         # Server Pro users:
         # image: quay.io/sharelatex/sharelatex-pro
         image: sharelatex/sharelatex
@@ -79,7 +79,7 @@ services:
           - "traefik.http.services.overleaf.loadbalancer.server.port=80"
             # - "traefik.http.routers.overleaf.tls.certresolver=le"
     mongo:
-        restart: always
+        restart: unless-stopped
         image: mongo
         container_name: mongo
         expose:
@@ -93,7 +93,7 @@ services:
             retries: 5
 
     redis:
-        restart: always
+        restart: unless-stopped
         image: redis
         container_name: redis
         expose:
@@ -102,7 +102,7 @@ services:
             - $HOME/redis_data:/data
 
     # ldap:
-    #    restart: always
+    #    restart: unless-stopped
     #    image: rroemhild/test-openldap
     #    container_name: ldap
     #    expose:
