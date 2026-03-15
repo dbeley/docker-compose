@@ -5,7 +5,7 @@ services:
         container_name: paperless_webserver
         # build: ./
         # uncomment the following line to start automatically on system boot
-        restart: always
+        restart: unless-stopped
         # ports:
         #     # You can adapt the port you want Paperless to listen on by
         #     # modifying the part before the `:`.
@@ -41,7 +41,7 @@ services:
         container_name: paperless_consumer
         # build: ./
         # uncomment the following line to start automatically on system boot
-        # restart: always
+        # restart: unless-stopped
         depends_on:
             webserver:
                 condition: service_healthy
