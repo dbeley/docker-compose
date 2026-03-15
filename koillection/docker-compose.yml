@@ -17,7 +17,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.koillection.entrypoints=insecure"
       - "traefik.http.routers.koillection.rule=Host(`koillection.$DOMAIN`)"
-      - "traefik.http.services.koillection.loadbalancer.server.port=81"
+      - "traefik.http.services.koillection.loadbalancer.server.port=80"
       # - "traefik.http.routers.koillection.tls.certresolver=le"
 
   koillection_db:
