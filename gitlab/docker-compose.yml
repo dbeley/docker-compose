@@ -2,6 +2,7 @@
 services:
   web:
     image: 'gitlab/gitlab-ee:latest'
+    container_name: gitlab
     restart: unless-stopped
     hostname: 'gitlab.docker.home'
     # environment:
