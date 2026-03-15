@@ -48,7 +48,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.photoview.entrypoints=insecure"
       - "traefik.http.routers.photoview.rule=Host(`photoview.$DOMAIN`)"
-      - "traefik.http.services.photoview.loadbalancer.server.port=8000"
+      - "traefik.http.services.photoview.loadbalancer.server.port=80"
       # - "traefik.http.routers.photoview.tls.certresolver=le"
 
 networks:
