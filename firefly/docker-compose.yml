@@ -18,6 +18,7 @@ services:
   db:
     image: mariadb
     hostname: fireflyiiidb
+    container_name: firefly_db
     environment:
       - PUID=1000
       - PGID=1000
