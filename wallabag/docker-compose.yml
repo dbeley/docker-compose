@@ -2,6 +2,7 @@
 services:
   wallabag:
     image: wallabag/wallabag
+    container_name: wallabag
     environment:
       - MYSQL_ROOT_PASSWORD=$WALLABAG_DB_ROOT_PASSWORD
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
@@ -29,6 +30,7 @@ services:
       # - "traefik.http.routers.wallabag.tls.certresolver=le"
   db:
     image: mariadb
+    container_name: wallabag_db
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=$WALLABAG_DB_ROOT_PASSWORD
@@ -36,6 +38,7 @@ services:
       - /opt/wallabag/data:/var/lib/mysql
   redis:
     image: redis:alpine
+    container_name: wallabag_redis
     restart: unless-stopped
 
 networks:
