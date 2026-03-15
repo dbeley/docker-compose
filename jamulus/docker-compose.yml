@@ -18,3 +18,8 @@ services:
       - "16"
       - "--multithreading"
       - "--fastupdate"
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
