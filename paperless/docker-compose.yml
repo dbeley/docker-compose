@@ -41,7 +41,7 @@ services:
         container_name: paperless_consumer
         # build: ./
         # uncomment the following line to start automatically on system boot
-        # restart: unless-stopped
+        restart: unless-stopped
         depends_on:
             webserver:
                 condition: service_healthy
