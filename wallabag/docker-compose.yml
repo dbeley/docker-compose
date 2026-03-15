@@ -20,6 +20,8 @@ services:
       - "80"
     volumes:
       - /opt/wallabag/images:/var/www/wallabag/web/assets/images
+    depends_on:
+      - db
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wallabag.entrypoints=insecure"
