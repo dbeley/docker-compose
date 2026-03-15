@@ -14,7 +14,7 @@ services:
       - "traefik.http.routers.libretranslate.entrypoints=insecure"
       - "traefik.http.routers.libretranslate.rule=Host(`libretranslate.$DOMAIN`)"
       - "traefik.http.services.libretranslate.loadbalancer.server.port=5000"
-        # - "traefik.http.routers.libretranslate.tls.certresolver=le"
+      # - "traefik.http.routers.libretranslate.tls.certresolver=le"
 
 networks:
   default:
