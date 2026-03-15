@@ -13,7 +13,7 @@ services:
       - "traefik.http.routers.statping.entrypoints=insecure"
       - "traefik.http.routers.statping.rule=Host(`statping.$DOMAIN`)"
       - "traefik.http.services.statping.loadbalancer.server.port=8080"
-        # - "traefik.http.routers.statping.tls.certresolver=le"
+      # - "traefik.http.routers.statping.tls.certresolver=le"
 
 networks:
   default:
