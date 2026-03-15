@@ -10,7 +10,7 @@ services:
     # AMD GPU
     # image: boinc/client:amd
     container_name: boinc
-    restart: always
+    restart: unless-stopped
     network_mode: host
     pid: host
     volumes:
