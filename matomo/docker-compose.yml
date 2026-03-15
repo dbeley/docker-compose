@@ -4,7 +4,7 @@ services:
   db:
     image: mariadb
     command: --max-allowed-packet=64MB
-    restart: always
+    restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
     # environment:
@@ -14,7 +14,7 @@ services:
 
   app:
     image: matomo:fpm-alpine
-    restart: always
+    restart: unless-stopped
     depends_on:
       - db
     volumes:
@@ -28,7 +28,7 @@ services:
 
   web:
     image: nginx:alpine
-    restart: always
+    restart: unless-stopped
     volumes:
       - matomo:/var/www/html:ro
       # see https://github.com/matomo-org/matomo-nginx
