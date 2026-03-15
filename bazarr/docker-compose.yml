@@ -1,6 +1,6 @@
 ---
 services:
-  deluge:
+  bazarr:
     image: lscr.io/linuxserver/bazarr
     container_name: bazarr
     restart: unless-stopped
