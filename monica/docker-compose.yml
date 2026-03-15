@@ -2,6 +2,7 @@
 services:
   db:
     image: mysql:5.7
+    container_name: monica_db
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_DATABASE=monica
