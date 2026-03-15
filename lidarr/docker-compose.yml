@@ -20,7 +20,7 @@ services:
       - "traefik.http.routers.lidarr.entrypoints=insecure"
       - "traefik.http.routers.lidarr.rule=Host(`lidarr.$DOMAIN`)"
       - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
-        # - "traefik.http.routers.lidarr.tls.certresolver=le"
+      # - "traefik.http.routers.lidarr.tls.certresolver=le"
 
 networks:
   default:
