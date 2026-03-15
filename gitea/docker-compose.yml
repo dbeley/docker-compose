@@ -2,6 +2,7 @@
 services:
   web:
     image: gitea/gitea:latest
+    container_name: gitea
     volumes:
       - ./data:/data
       - /etc/timezone:/etc/timezone:ro
@@ -24,6 +25,7 @@ services:
 
   db:
     image: mariadb:10
+    container_name: gitea_db
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
