@@ -19,7 +19,7 @@ services:
       - "traefik.http.routers.calibre.entrypoints=insecure"
       - "traefik.http.routers.calibre.rule=Host(`calibre.$DOMAIN`)"
       - "traefik.http.services.calibre.loadbalancer.server.port=8083"
-        # - "traefik.http.routers.calibre.tls.certresolver=le"
+      # - "traefik.http.routers.calibre.tls.certresolver=le"
 
 networks:
   default:
