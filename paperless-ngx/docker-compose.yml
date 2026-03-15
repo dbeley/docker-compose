@@ -42,7 +42,7 @@ services:
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: paperless
+      POSTGRES_PASSWORD: $PAPERLESS_POSTGRES_PASSWORD
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
