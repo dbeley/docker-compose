@@ -1,0 +1,21 @@
+---
+services:
+  wud:
+    image: getwud/wud
+    container_name: wud
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    # ports:
+    #   - 3000:3000
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wud.entrypoints=insecure"
+      - "traefik.http.routers.wud.rule=Host(`wud.$DOMAIN`)"
+      - "traefik.http.services.wud.loadbalancer.server.port=3000"
+      # - "traefik.http.routers.wud.tls.certresolver=le"
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
