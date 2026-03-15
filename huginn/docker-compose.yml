@@ -3,7 +3,7 @@ services:
   huginn_db:
     image: postgres
     container_name: huginn_db
-    restart: always
+    restart: unless-stopped
     environment:
       - POSTGRES_PASSWORD=$DB_PASSWORD
       - POSTGRES_USER=$DB_USERNAME
@@ -13,7 +13,7 @@ services:
   huginn:
     image: huginn/huginn
     container_name: huginn
-    restart: always
+    restart: unless-stopped
     # ports:
     #   - "3000:3000"
     environment:
