@@ -11,7 +11,7 @@ services:
       - "traefik.http.routers.cyberchef.entrypoints=insecure"
       - "traefik.http.routers.cyberchef.rule=Host(`cyberchef.$DOMAIN`)"
       - "traefik.http.services.cyberchef.loadbalancer.server.port=8000"
-        # - "traefik.http.routers.cyberchef.tls.certresolver=le"
+      # - "traefik.http.routers.cyberchef.tls.certresolver=le"
 
 networks:
   default:
