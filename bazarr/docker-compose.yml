@@ -18,7 +18,7 @@ services:
       - "traefik.http.routers.bazarr.entrypoints=insecure"
       - "traefik.http.routers.bazarr.rule=Host(`bazarr.$DOMAIN`)"
       - "traefik.http.services.bazarr.loadbalancer.server.port=6767"
-        # - "traefik.http.routers.bazarr.tls.certresolver=le"
+      # - "traefik.http.routers.bazarr.tls.certresolver=le"
 
 networks:
   default:
