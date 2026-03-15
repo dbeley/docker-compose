@@ -8,7 +8,7 @@ services:
       - SERVER_URL=$AIRSONIC_URL
     # ports:
     #   - 80:8080
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.airsonicrefix.entrypoints=insecure"
