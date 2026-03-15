@@ -37,7 +37,7 @@ services:
       - MYSQL_USER=bookstack
       - MYSQL_PASSWORD=$MYSQL_PASSWORD
     volumes:
-      - $DATA_FOLDER:/config
+      - $DB_DATA_FOLDER:/config
     restart: unless-stopped
 
 networks:
