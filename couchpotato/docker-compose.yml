@@ -20,7 +20,7 @@ services:
       - "traefik.http.routers.couchpotato.entrypoints=insecure"
       - "traefik.http.routers.couchpotato.rule=Host(`couchpotato.$DOMAIN`)"
       - "traefik.http.services.couchpotato.loadbalancer.server.port=5050"
-        # - "traefik.http.routers.couchpotato.tls.certresolver=le"
+      # - "traefik.http.routers.couchpotato.tls.certresolver=le"
 
 networks:
   default:
