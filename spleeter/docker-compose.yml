@@ -16,3 +16,8 @@ services:
     # command: separate -i /input/audio_1.mp3 /input/audio_2.mp3 -o /output -p spleeter:4stems
     # vocals/bass/drums/piano/other
     command: separate -i /input/audio_1.mp3 -o /output -p spleeter:5stems
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
