@@ -2,7 +2,7 @@
 services:
   web:
     image: 'gitlab/gitlab-ee:latest'
-    restart: always
+    restart: unless-stopped
     hostname: 'gitlab.docker.home'
     # environment:
       # GITLAB_OMNIBUS_CONFIG: |
