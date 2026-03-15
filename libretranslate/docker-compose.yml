@@ -8,7 +8,7 @@ services:
       - LT_FRONTEND_LANGUAGE_TARGET=fr
     # ports:
     #   - 5000:5000
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.libretranslate.entrypoints=insecure"
