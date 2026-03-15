@@ -18,7 +18,7 @@ services:
       - "traefik.http.routers.homer.rule=Host(`homer.$DOMAIN`)"
       - "traefik.http.services.homer.loadbalancer.server.port=8080"
       - "traefik.http.routers.homer.entrypoints=insecure"
-        # - "traefik.http.routers.homer.tls.certresolver=le"
+      # - "traefik.http.routers.homer.tls.certresolver=le"
 
 networks:
   default:
