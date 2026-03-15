@@ -9,3 +9,9 @@ services:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_SCHEDULE=36 3 0 * * 0
       - WATCHTOWER_UPDATE_ON_START=true
+    restart: unless-stopped
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
