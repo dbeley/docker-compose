@@ -13,7 +13,7 @@ services:
       - "traefik.http.routers.thelounge.entrypoints=insecure"
       - "traefik.http.routers.thelounge.rule=Host(`thelounge.$DOMAIN`)"
       - "traefik.http.services.thelounge.loadbalancer.server.port=9000"
-        # - "traefik.http.routers.thelounge.tls.certresolver=le"
+      # - "traefik.http.routers.thelounge.tls.certresolver=le"
 
 networks:
   default:
