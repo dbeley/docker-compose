@@ -20,7 +20,7 @@ services:
       - "traefik.http.routers.radarr.entrypoints=insecure"
       - "traefik.http.routers.radarr.rule=Host(`radarr.$DOMAIN`)"
       - "traefik.http.services.radarr.loadbalancer.server.port=7878"
-        # - "traefik.http.routers.radarr.tls.certresolver=le"
+      # - "traefik.http.routers.radarr.tls.certresolver=le"
 
 networks:
   default:
