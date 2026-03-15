@@ -19,7 +19,7 @@ services:
       - "traefik.http.routers.pyload.entrypoints=insecure"
       - "traefik.http.routers.pyload.rule=Host(`pyload.$DOMAIN`)"
       - "traefik.http.services.pyload.loadbalancer.server.port=8000"
-        # - "traefik.http.routers.pyload.tls.certresolver=le"
+      # - "traefik.http.routers.pyload.tls.certresolver=le"
 
 networks:
   default:
