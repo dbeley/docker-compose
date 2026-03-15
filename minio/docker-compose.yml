@@ -15,10 +15,8 @@ services:
       - "traefik.http.services.minio.loadbalancer.server.port=9000"
       # - "traefik.http.routers.minio.tls.certresolver=le"
     environment:
-      MINIO_ACCESS_KEY: $S3_ACCESS_KEY
-      MINIO_SECRET_KEY: $S3_SECRET_KEY
-    #   MINIO_ACCESS_KEY: $MINIO_ACCESS_KEY
-    #   MINIO_SECRET_KEY: $MINIO_SECRET_KEY
+      MINIO_ROOT_USER: $S3_ACCESS_KEY
+      MINIO_ROOT_PASSWORD: $S3_SECRET_KEY
     # command: server /data
     command: gateway s3 https://s3.fr-par.scw.cloud/
 
