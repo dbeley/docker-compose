@@ -30,6 +30,7 @@ services:
 
   postgres:
     image: postgres:16
+    container_name: maybe_postgres
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
