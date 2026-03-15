@@ -81,6 +81,8 @@ services:
     depends_on:
       librephotos-db:
         condition: service_healthy
+      librephotos-redis:
+        condition: service_started
   librephotos-redis:
     image: redis:alpine
     container_name: librephotos-redis
