@@ -2,7 +2,7 @@
 services:
   traefik:
     image: traefik
-    restart: always
+    restart: unless-stopped
     container_name: "traefik"
     # Enables the web UI and tells Traefik to listen to docker
     ports:
