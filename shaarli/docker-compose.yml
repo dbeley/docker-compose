@@ -24,7 +24,7 @@ services:
       - "traefik.http.routers.shaarli.entrypoints=insecure"
       - "traefik.http.routers.shaarli.rule=Host(`shaarli.$DOMAIN`)"
       - "traefik.http.services.shaarli.loadbalancer.server.port=80"
-        # - "traefik.http.routers.shaarli.tls.certresolver=le"
+      # - "traefik.http.routers.shaarli.tls.certresolver=le"
 
 networks:
   default:
