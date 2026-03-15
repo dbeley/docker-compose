@@ -7,7 +7,7 @@ services:
       # - APPLICATION_URL=
     # ports:
     #   - 8334:8334
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.filestash.entrypoints=insecure"
