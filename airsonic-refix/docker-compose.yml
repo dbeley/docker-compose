@@ -14,7 +14,7 @@ services:
       - "traefik.http.routers.airsonicrefix.entrypoints=insecure"
       - "traefik.http.routers.airsonicrefix.rule=Host(`airsonic-refix.$DOMAIN`)"
       - "traefik.http.services.airsonicrefix.loadbalancer.server.port=80"
-        # - "traefik.http.routers.airsonicrefix.tls.certresolver=le"
+      # - "traefik.http.routers.airsonicrefix.tls.certresolver=le"
 
 networks:
   default:
