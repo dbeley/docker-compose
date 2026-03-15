@@ -1,10 +1,11 @@
 ---
 services:
   watchtower:
-    image: containrrr/watchtower
+    image: nickfedor/watchtower
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_SCHEDULE=36 3 0 * * 0
+      - WATCHTOWER_UPDATE_ON_START=true
