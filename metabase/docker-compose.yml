@@ -7,11 +7,11 @@ services:
       - 5432:5432
     environment:
       - "POSTGRES_USER=metabase"
-        # - "POSTGRES_DB=metabase"
+      - "POSTGRES_DB=metabase"
       - "POSTGRES_PASSWORD=$PG_PASSWORD"
-        # - "PGDATA=/var/lib/postgresql/data"
-        # volumes:
-        # - ./pgdata:/var/lib/postgresql/data
+      - "PGDATA=/var/lib/postgresql/data"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
   metabase-app:
     image: metabase/metabase
     # ports:
