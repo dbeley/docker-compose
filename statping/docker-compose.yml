@@ -5,6 +5,8 @@ services:
     container_name: statping
     # ports:
     #   - 8080:8080
+    volumes:
+      - statping_data:/app
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -17,3 +19,6 @@ networks:
   default:
     name: $DEFAULT_NETWORK
     external: true
+
+volumes:
+  statping_data:
