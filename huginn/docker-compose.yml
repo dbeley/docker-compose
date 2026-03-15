@@ -7,6 +7,8 @@ services:
     environment:
       - POSTGRES_PASSWORD=$DB_PASSWORD
       - POSTGRES_USER=$DB_USERNAME
+    volumes:
+      - huginn_db_data:/var/lib/postgresql/data
 
   huginn:
     image: huginn/huginn
@@ -32,3 +34,6 @@ networks:
   default:
     name: $DEFAULT_NETWORK
     external: true
+
+volumes:
+  huginn_db_data:
