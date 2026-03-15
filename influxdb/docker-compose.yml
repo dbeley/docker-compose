@@ -7,7 +7,7 @@ services:
       - ./influxdb:/var/lib/influxdb
     # ports:
     #   - 8086:8086
-    restart: always
+    restart: unless-stopped
     environment:
       INFLUX_DB: $INFLUX_DB
       INFLUX_DB_USER: $INFLUX_DB_USER
