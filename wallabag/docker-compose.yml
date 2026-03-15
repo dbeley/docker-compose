@@ -21,6 +21,7 @@ services:
       - /opt/wallabag/images:/var/www/wallabag/web/assets/images
     depends_on:
       - db
+      - redis
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
