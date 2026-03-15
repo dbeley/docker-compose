@@ -87,3 +87,8 @@ services:
     image: redis:alpine
     container_name: librephotos-redis
     restart: unless-stopped
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
