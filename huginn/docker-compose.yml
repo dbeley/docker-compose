@@ -28,7 +28,7 @@ services:
       - "traefik.http.routers.huginn.entrypoints=insecure"
       - "traefik.http.routers.huginn.rule=Host(`huginn.$DOMAIN`)"
       - "traefik.http.services.huginn.loadbalancer.server.port=3000"
-        # - "traefik.http.routers.huginn.tls.certresolver=le"
+      # - "traefik.http.routers.huginn.tls.certresolver=le"
 
 networks:
   default:
