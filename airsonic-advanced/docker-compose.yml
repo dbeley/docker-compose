@@ -20,7 +20,7 @@ services:
       - "traefik.http.routers.airsonicadvanced.entrypoints=insecure"
       - "traefik.http.routers.airsonicadvanced.rule=Host(`airsonic.$DOMAIN`)"
       - "traefik.http.services.airsonicadvanced.loadbalancer.server.port=4040"
-        # - "traefik.http.routers.airsonicadvanced.tls.certresolver=le"
+      # - "traefik.http.routers.airsonicadvanced.tls.certresolver=le"
 
 networks:
   default:
