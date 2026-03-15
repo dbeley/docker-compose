@@ -21,7 +21,7 @@ services:
       - "traefik.http.routers.syncthing.entrypoints=insecure"
       - "traefik.http.routers.syncthing.rule=Host(`syncthing.$DOMAIN`)"
       - "traefik.http.services.syncthing.loadbalancer.server.port=8384"
-        # - "traefik.http.routers.syncthing.tls.certresolver=le"
+      # - "traefik.http.routers.syncthing.tls.certresolver=le"
 
 networks:
   default:
