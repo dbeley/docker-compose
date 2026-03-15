@@ -32,6 +32,8 @@ services:
     image: nginx:alpine
     container_name: matomo_web
     restart: unless-stopped
+    depends_on:
+      - app
     volumes:
       - matomo:/var/www/html:ro
       # see https://github.com/matomo-org/matomo-nginx
