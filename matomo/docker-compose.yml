@@ -3,6 +3,7 @@
 services:
   db:
     image: mariadb
+    container_name: matomo_db
     command: --max-allowed-packet=64MB
     restart: unless-stopped
     volumes:
@@ -14,6 +15,7 @@ services:
 
   app:
     image: matomo:fpm-alpine
+    container_name: matomo_app
     restart: unless-stopped
     depends_on:
       - db
@@ -28,6 +30,7 @@ services:
 
   web:
     image: nginx:alpine
+    container_name: matomo_web
     restart: unless-stopped
     volumes:
       - matomo:/var/www/html:ro
