@@ -3,8 +3,6 @@ services:
   postgres-db:
     image: postgres
     restart: always
-    ports:
-      - 5432:5432
     environment:
       - "POSTGRES_USER=metabase"
       - "POSTGRES_DB=metabase"
