@@ -25,7 +25,7 @@ services:
       - "traefik.http.routers.gonic.entrypoints=insecure"
       - "traefik.http.routers.gonic.rule=Host(`gonic.$DOMAIN`)"
       - "traefik.http.services.gonic.loadbalancer.server.port=80"
-        # - "traefik.http.routers.gonic.tls.certresolver=le"
+      # - "traefik.http.routers.gonic.tls.certresolver=le"
 
 networks:
   default:
