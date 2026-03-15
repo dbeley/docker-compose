@@ -16,6 +16,7 @@ services:
     #   - "3000:3000"
     environment:
       - HUGINN_DATABASE_ADAPTER=postgresql
+      - HUGINN_DATABASE_HOST=huginn_db
       - HUGINN_DATABASE_USERNAME=$DB_USERNAME
       - HUGINN_DATABASE_PASSWORD=$DB_PASSWORD
     depends_on:
