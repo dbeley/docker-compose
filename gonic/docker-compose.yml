@@ -19,7 +19,7 @@ services:
       - audio
     devices:
       - /dev/snd:/dev/snd
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gonic.entrypoints=insecure"
