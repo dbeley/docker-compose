@@ -1,3 +1,4 @@
+---
 # docker-compose file for running paperless from the Docker Hub.
 # This file contains everything paperless needs to run.
 # Paperless supports amd64, arm and arm64 hardware.
@@ -79,6 +80,6 @@ volumes:
   redisdata:
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

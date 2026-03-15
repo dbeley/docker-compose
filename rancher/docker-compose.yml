@@ -1,4 +1,4 @@
-
+---
 services:
   rancher:
     image: rancher/rancher

@@ -15,7 +15,7 @@ services:
   app:
     image: matomo:fpm-alpine
     restart: always
-    links:
+    depends_on:
       - db
     volumes:
     # - ./config:/var/www/html/config:rw
@@ -47,6 +47,6 @@ volumes:
   matomo:
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

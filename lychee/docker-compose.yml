@@ -22,8 +22,6 @@ services:
       - ./lychee/conf:/conf
       - ./lychee/uploads:/uploads
       - ./lychee/sym:/sym
-    links:
-      - lychee_db
     environment:
       - PUID=1000
       - PGID=1000
@@ -73,10 +71,9 @@ services:
       # - "traefik.http.routers.lychee.tls.certresolver=le"
 
 networks:
-    lychee:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
 
 volumes:
   lychee_mysql:

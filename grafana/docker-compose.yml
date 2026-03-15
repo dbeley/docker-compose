@@ -7,10 +7,10 @@ services:
     #  - 3000:3000
     restart: always
     environment:
-        GF_SECURITY_ADMIN_USER: $GF_SECURITY_ADMIN_USER
-        GF_SECURITY_ADMIN_PASSWORD: $GF_SECURITY_ADMIN_PASSWORD
+      GF_SECURITY_ADMIN_USER: $GF_SECURITY_ADMIN_USER
+      GF_SECURITY_ADMIN_PASSWORD: $GF_SECURITY_ADMIN_PASSWORD
     volumes:
-        - grafana-storage:/var/lib/grafana
+      - grafana-storage:/var/lib/grafana
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.entrypoints=insecure"
@@ -19,9 +19,9 @@ services:
       # - "traefik.http.routers.grafana.tls.certresolver=le"
 
 volumes:
-    grafana-storage:
+  grafana-storage:
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

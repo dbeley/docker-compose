@@ -34,6 +34,6 @@ services:
       - ./db/:/var/lib/mysql
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

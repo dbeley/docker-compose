@@ -31,6 +31,6 @@ services:
       # - "traefik.http.routers.jellyfin.tls.certresolver=le"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

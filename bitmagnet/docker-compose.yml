@@ -52,6 +52,6 @@ services:
       interval: 10s
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

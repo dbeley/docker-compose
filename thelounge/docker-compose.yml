@@ -1,3 +1,4 @@
+---
 services:
   thelounge:
     image: thelounge/thelounge:latest
@@ -15,6 +16,6 @@ services:
         # - "traefik.http.routers.thelounge.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

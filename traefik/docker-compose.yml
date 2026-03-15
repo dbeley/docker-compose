@@ -1,4 +1,4 @@
-
+---
 services:
   traefik:
     image: traefik
@@ -29,6 +29,6 @@ services:
       # - "traefik.http.routers.redirect-https.middlewares=redirect-to-https"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

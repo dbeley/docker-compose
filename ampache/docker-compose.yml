@@ -19,8 +19,8 @@ services:
 
 networks:
   default:
-    external:
-      name: $DEFAULT_NETWORK
+    name: $DEFAULT_NETWORK
+    external: true
 
 volumes:
   ampache-config:

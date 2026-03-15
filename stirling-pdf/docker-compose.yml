@@ -21,6 +21,6 @@ services:
       # - "traefik.http.routers.stirling-pdf.tls.certresolver=le"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

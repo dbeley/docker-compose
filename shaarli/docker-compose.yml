@@ -27,9 +27,9 @@ services:
         # - "traefik.http.routers.shaarli.tls.certresolver=le"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
 
 volumes:
   shaarli-cache:

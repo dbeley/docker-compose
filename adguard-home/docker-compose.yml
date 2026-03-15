@@ -32,6 +32,6 @@ services:
       # - "traefik.http.routers.adguardhome.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

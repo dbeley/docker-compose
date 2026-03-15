@@ -13,9 +13,9 @@ services:
       - "traefik.http.routers.pywb.entrypoints=insecure"
       - "traefik.http.routers.pywb.rule=Host(`pywb.$DOMAIN`)"
       - "traefik.http.services.pywb.loadbalancer.server.port=8080"
-      # - "traefik.http.routers.jellyfin.tls.certresolver=le"
+      # - "traefik.http.routers.pywb.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

@@ -13,7 +13,6 @@ services:
 
   photoview:
     image: viktorstrate/photoview:2
-    restart: always
     ports:
       - "8000:80"
     depends_on:
@@ -53,9 +52,9 @@ services:
       # - "traefik.http.routers.photoview.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
 
 volumes:
   db_data:

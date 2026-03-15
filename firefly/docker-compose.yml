@@ -35,6 +35,6 @@ volumes:
   firefly_iii_db:
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

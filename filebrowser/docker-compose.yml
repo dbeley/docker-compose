@@ -21,6 +21,6 @@ services:
       # - "traefik.http.routers.filebrowser.tls.certresolver=le"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

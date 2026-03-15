@@ -1,4 +1,4 @@
-
+---
 services:
   huginn_db:
     image: postgres
@@ -28,6 +28,6 @@ services:
         # - "traefik.http.routers.huginn.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

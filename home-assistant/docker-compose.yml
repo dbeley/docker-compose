@@ -1,3 +1,4 @@
+---
 services:
   homeassistant:
     container_name: homeassistant
@@ -15,6 +16,6 @@ services:
       - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
       # - "traefik.http.routers.homeassistant.tls.certresolver=le"
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

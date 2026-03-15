@@ -41,6 +41,6 @@ services:
     restart: unless-stopped
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

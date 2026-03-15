@@ -1,4 +1,4 @@
-
+---
 services:
   postgres-db:
     image: postgres
@@ -34,11 +34,9 @@ services:
       - "MB_DB_HOST=postgres-db"
     depends_on:
       - postgres-db
-    links:
-      - postgres-db
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
 

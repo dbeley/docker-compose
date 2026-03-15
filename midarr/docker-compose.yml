@@ -3,13 +3,12 @@ services:
   midarr:
     image: ghcr.io/midarrlabs/midarr-server:latest
     container_name: midarr
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - $RADARR_FOLDER:/radarr/movies/path
       - $SONARR_FOLDER:/sonarr/shows/path
     environment:
+      - PUID=1000
+      - PGID=1000
 #       App config
       - APP_URL=http://localhost:4000
       - APP_MAILER_FROM=example@email.com
@@ -59,6 +58,6 @@ volumes:
   database-data:
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

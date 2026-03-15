@@ -1,3 +1,4 @@
+---
 services:
   boinc:
     # standard x86-64

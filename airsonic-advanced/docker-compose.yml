@@ -23,6 +23,6 @@ services:
         # - "traefik.http.routers.airsonicadvanced.tls.certresolver=le"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

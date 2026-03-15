@@ -18,9 +18,9 @@ services:
       - "traefik.http.routers.netdata.entrypoints=insecure"
       - "traefik.http.routers.netdata.rule=Host(`netdata.$DOMAIN`)"
       - "traefik.http.services.netdata.loadbalancer.server.port=19999"
-      # - "traefik.http.routers.jellyfin.tls.certresolver=le"
+      # - "traefik.http.routers.netdata.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

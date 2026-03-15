@@ -1,4 +1,4 @@
-
+---
 volumes:
   nextcloud:
   db:
@@ -20,7 +20,7 @@ services:
   app:
     image: nextcloud
     container_name: nextcloud
-    links:
+    depends_on:
       - db
     volumes:
       - nextcloud:/var/www/html
@@ -51,6 +51,6 @@ services:
         #         # - "traefik.http.routers.nextcloud.tls.certresolver=le"
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

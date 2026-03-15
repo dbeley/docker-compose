@@ -26,6 +26,6 @@ services:
         # - "traefik.http.routers.librespeed.tls.certresolver=le"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

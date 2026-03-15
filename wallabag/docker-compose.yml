@@ -1,3 +1,4 @@
+---
 services:
   wallabag:
     image: wallabag/wallabag
@@ -35,6 +36,6 @@ services:
     image: redis:alpine
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

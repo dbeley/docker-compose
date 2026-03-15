@@ -23,6 +23,6 @@ services:
     command: gateway s3 https://s3.fr-par.scw.cloud/
 
 networks:
-    default:
-        external:
-            name: $DEFAULT_NETWORK
+  default:
+    name: $DEFAULT_NETWORK
+    external: true

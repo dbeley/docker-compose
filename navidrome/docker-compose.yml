@@ -24,6 +24,6 @@ services:
         # - "traefik.http.routers.navidrome.tls.certresolver=le"
 
 networks:
-    default:
-        name: $DEFAULT_NETWORK
-        external: true
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
