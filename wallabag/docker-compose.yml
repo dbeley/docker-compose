@@ -18,7 +18,7 @@ services:
       - SYMFONY__ENV__FROM_EMAIL=wallabag@example.com
       - SYMFONY__ENV__DOMAIN_NAME=http://wallabag.docker.home
     volumes:
-      - /opt/wallabag/images:/var/www/wallabag/web/assets/images
+      - $WALLABAG_IMAGES_FOLDER:/var/www/wallabag/web/assets/images
     depends_on:
       - db
       - redis
@@ -36,7 +36,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=$WALLABAG_DB_ROOT_PASSWORD
     volumes:
-      - /opt/wallabag/data:/var/lib/mysql
+      - $WALLABAG_DATA_FOLDER:/var/lib/mysql
   redis:
     image: redis:alpine
     container_name: wallabag_redis
