@@ -30,7 +30,7 @@ services:
       - "traefik.http.routers.nextcloud.entrypoints=insecure"
       - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.$DOMAIN`)"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
-        # - "traefik.http.routers.nextcloud.tls.certresolver=le"
+      # - "traefik.http.routers.nextcloud.tls.certresolver=le"
 
         #   web:
         #     image: nginx
