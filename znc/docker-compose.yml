@@ -17,7 +17,7 @@ services:
       - "traefik.http.routers.znc.entrypoints=insecure"
       - "traefik.http.routers.znc.rule=Host(`znc.$DOMAIN`)"
       - "traefik.http.services.znc.loadbalancer.server.port=6501"
-        # - "traefik.http.routers.znc.tls.certresolver=le"
+      # - "traefik.http.routers.znc.tls.certresolver=le"
 
 networks:
   default:
