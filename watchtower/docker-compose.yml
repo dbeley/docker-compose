@@ -7,7 +7,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_SCHEDULE=36 3 0 * * 0
+      - WATCHTOWER_SCHEDULE=36 3 * * *
       - WATCHTOWER_UPDATE_ON_START=true
     restart: unless-stopped
 
