@@ -1,0 +1,10 @@
+# FileBrowser Quantum config
+# Docs: https://filebrowserquantum.com/en/docs/configuration/configuration-overview/
+# v2.0.0+ uses SQLite (filebrowser.sqlite), stored in /home/filebrowser/data
+
+server:
+  cacheDir: /home/filebrowser/data/tmp
+  sources:
+    - path: /srv
+      config:
+        defaultEnabled: true
