@@ -1,0 +1,33 @@
+---
+services:
+  trek:
+    image: mauriceboe/trek:latest
+    container_name: trek
+    env_file: .env
+    volumes:
+      - trek-data:/app/data
+      - trek-uploads:/app/uploads
+    # ports:
+      # - 3000:3000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.trek.entrypoints=insecure"
+      - "traefik.http.routers.trek.rule=Host(`trek.$DOMAIN`)"
+      - "traefik.http.services.trek.loadbalancer.server.port=3000"
+      # - "traefik.http.routers.trek.tls.certresolver=le"
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
+
+volumes:
+  trek-data:
+  trek-uploads:
