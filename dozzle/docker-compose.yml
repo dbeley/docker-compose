@@ -1,0 +1,26 @@
+---
+services:
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    env_file: .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dozzle-data:/data
+    # ports:
+      # - 8080:8080
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dozzle.entrypoints=insecure"
+      - "traefik.http.routers.dozzle.rule=Host(`dozzle.$DOMAIN`)"
+      - "traefik.http.services.dozzle.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.dozzle.tls.certresolver=le"
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
+
+volumes:
+  dozzle-data:
