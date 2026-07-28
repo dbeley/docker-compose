@@ -6,8 +6,7 @@ services:
     env_file: .env
     volumes:
       - $SOURCE_FOLDER:/srv
-      - filebrowser-quantum-data:/home/filebrowser/data
-      - ./config.yaml:/home/filebrowser/data/config.yaml
+      - ./data:/home/filebrowser/data
     # ports:
       # - 80:80
     restart: unless-stopped
@@ -22,6 +21,3 @@ networks:
   default:
     name: $DEFAULT_NETWORK
     external: true
-
-volumes:
-  filebrowser-quantum-data:
