@@ -1,0 +1,25 @@
+---
+services:
+  linkding:
+    image: sissbruecker/linkding:latest
+    container_name: linkding
+    env_file: .env
+    volumes:
+      - linkding-data:/etc/linkding/data
+    # ports:
+      # - 9090:9090
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.linkding.entrypoints=insecure"
+      - "traefik.http.routers.linkding.rule=Host(`linkding.$DOMAIN`)"
+      - "traefik.http.services.linkding.loadbalancer.server.port=9090"
+      # - "traefik.http.routers.linkding.tls.certresolver=le"
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
+
+volumes:
+  linkding-data:
