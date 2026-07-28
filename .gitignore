@@ -30,3 +30,6 @@ traefik/certs
 koillection/volumes
 homarr/homarr
 changedetection/datastore
+maloja-fork/config
+maloja-fork/data
+maloja-fork/logs

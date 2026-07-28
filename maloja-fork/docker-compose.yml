@@ -1,0 +1,26 @@
+---
+services:
+  maloja:
+    build:
+      context: https://github.com/dbeley/maloja.git#master
+      dockerfile: Containerfile
+    container_name: maloja-fork
+    env_file: .env
+    volumes:
+      - ./config:/etc/maloja
+      - ./data:/var/lib/maloja
+      - ./logs:/var/log/maloja
+    # ports:
+      # - 42010:42010
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maloja-fork.entrypoints=insecure"
+      - "traefik.http.routers.maloja-fork.rule=Host(`maloja-fork.$DOMAIN`)"
+      - "traefik.http.services.maloja-fork.loadbalancer.server.port=42010"
+      # - "traefik.http.routers.maloja-fork.tls.certresolver=le"
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
