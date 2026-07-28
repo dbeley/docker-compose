@@ -1,17 +1,29 @@
 ---
 services:
   netdata:
-    image: netdata/netdata
+    image: netdata/netdata:stable
     container_name: netdata
-    hostname: docker.home
+    hostname: $DOMAIN
+    init: true
     volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /var/log:/host/var/log:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     cap_add:
       - SYS_PTRACE
+      - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
+    # ports:
+      # - 19999:19999
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -24,3 +36,8 @@ networks:
   default:
     name: $DEFAULT_NETWORK
     external: true
+
+volumes:
+  netdataconfig:
+  netdatalib:
+  netdatacache:
