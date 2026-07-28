@@ -1,0 +1,22 @@
+---
+services:
+  cloudcmd:
+    image: coderaiser/cloudcmd
+    container_name: cloudcmd
+    env_file: .env
+    volumes:
+      - $SOURCE_FOLDER:/mnt/fs
+    # ports:
+      # - 8000:8000
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cloudcmd.entrypoints=insecure"
+      - "traefik.http.routers.cloudcmd.rule=Host(`cloudcmd.$DOMAIN`)"
+      - "traefik.http.services.cloudcmd.loadbalancer.server.port=8000"
+      # - "traefik.http.routers.cloudcmd.tls.certresolver=le"
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
+    external: true
